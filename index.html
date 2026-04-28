@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>தமிழ் எழுத்துக்கள் – 247 | Interactive Tamil Alphabet</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Tamil','Segoe UI',sans-serif;background:#0d0d1a;color:#fff;padding:14px}
+.hdr{text-align:center;background:linear-gradient(135deg,#f4d03f,#e67e22);color:#000;padding:16px;border-radius:12px;margin-bottom:12px;box-shadow:0 4px 22px rgba(244,208,63,.4)}
+.hdr h1{font-size:1.9em;font-weight:900}.hdr p{font-size:.85em;opacity:.75;margin-top:4px}
+.stats{display:flex;justify-content:center;gap:16px;margin-top:8px;flex-wrap:wrap}
+.chip{background:rgba(0,0,0,.18);padding:2px 12px;border-radius:20px;font-size:.76em;font-weight:700}
+.toolbar{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;justify-content:center;align-items:center}
+.search{flex:1;min-width:180px;max-width:300px;padding:7px 14px;background:#111;border:1.5px solid #f4d03f44;border-radius:24px;color:#fff;font-size:.88em;outline:none;font-family:inherit}
+.search:focus{border-color:#f4d03f}.search::placeholder{color:#555}
+.fbtn{padding:6px 12px;background:#111;border:1.5px solid #f4d03f33;border-radius:20px;color:#999;font-size:.75em;cursor:pointer;transition:all .15s;font-family:inherit}
+.fbtn.on,.fbtn:hover{background:#f4d03f22;border-color:#f4d03f;color:#f4d03f}
+.legend{display:flex;gap:12px;justify-content:center;margin-bottom:10px;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:5px;font-size:.75em;color:#bbb}
+.ld{width:11px;height:11px;border-radius:3px}
+.gw{overflow-x:auto;border-radius:10px;border:1px solid #f4d03f22;margin-bottom:16px}
+table{border-collapse:collapse;margin:0 auto;background:#000}
+th,td{border:1px solid #f4d03f18;text-align:center;min-width:44px;padding:5px 3px}
+.hc{background:#f4d03f;color:#000;font-size:1.05em;font-weight:700;cursor:pointer;transition:all .15s}
+.hc:hover{background:#e67e22;transform:scale(1.07);position:relative;z-index:2}
+.cc{font-size:1.2em;color:#f4d03f;cursor:pointer;font-weight:600;background:#020210;transition:all .14s;position:relative}
+.cc:hover{background:#f4d03f!important;color:#000;transform:scale(1.12);position:relative;z-index:2;box-shadow:0 0 12px rgba(244,208,63,.5)}
+.cc.ok::after{content:'✓';position:absolute;top:1px;right:2px;font-size:.4em;color:#2ecc71}
+.pc{font-size:1.05em;color:#cc99ff;cursor:pointer;font-weight:600;background:#070015;transition:all .14s;position:relative}
+.pc:hover{background:#cc99ff!important;color:#000;transform:scale(1.1);position:relative;z-index:2}
+.pc.ok::after{content:'✓';position:absolute;top:1px;right:2px;font-size:.4em;color:#2ecc71}
+.cx{color:#f4d03f;font-size:.62em;padding:3px;background:#0a0a1a}.vrow td{background:#0c0c00}
+.rh .cc{background:#0d0003}.rs .cc{background:#000d03}.rm .cc{background:#02060d}
+.cc.dim,.pc.dim{opacity:.12;pointer-events:none}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999;justify-content:center;align-items:center;padding:12px}
+.ov.open{display:flex}
+.md{background:linear-gradient(155deg,#12122a,#1a1a3e);border:2px solid #f4d03f;border-radius:18px;max-width:490px;width:100%;max-height:92vh;display:flex;flex-direction:column;animation:pop .2s ease;overflow:hidden}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.mh{padding:18px 18px 0;flex-shrink:0;position:relative}
+.mcl{position:absolute;top:10px;right:14px;background:none;border:none;color:#f4d03f;font-size:1.4em;cursor:pointer}
+.mcl:hover{color:#e67e22}
+.mchr{font-size:5em;text-align:center;color:#f4d03f;line-height:1;margin-bottom:5px;text-shadow:0 0 36px rgba(244,208,63,.35)}
+.br{text-align:center;margin-bottom:7px}
+.bg{display:inline-block;padding:2px 12px;border-radius:20px;font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.bv{background:#f4d03f;color:#000}.bc{background:#cc99ff;color:#000}
+.bk{background:#5dade2;color:#000}.ba{background:#e74c3c;color:#fff}.bp{background:#a569bd;color:#fff}
+.rom{font-size:1.75em;color:#fff;font-style:italic;text-align:center;display:block;letter-spacing:.02em}
+.ipa{font-size:.88em;color:#888;text-align:center;margin-bottom:3px}
+.ctag{text-align:center;font-size:.7em;color:#999;margin-bottom:9px}
+.tabs{display:flex;border-bottom:1px solid #f4d03f22;flex-shrink:0;padding:0 18px}
+.tab{flex:1;padding:8px 3px;background:none;border:none;color:#777;font-size:.8em;cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
+.tab.on{color:#f4d03f;border-bottom-color:#f4d03f}
+.panels{overflow-y:auto;flex:1;padding:0 18px 18px}
+.pn{display:none;padding-top:12px}.pn.on{display:block}
+.comps{display:flex;justify-content:center;align-items:center;gap:10px;font-size:2em;color:#f4d03f;margin:2px 0 10px;padding:9px;background:rgba(244,208,63,.06);border-radius:10px}
+.cop{font-size:.48em;color:#666}
+.sec{border-left:3px solid #f4d03f;padding:7px 11px;margin-bottom:9px;background:rgba(244,208,63,.04);border-radius:0 8px 8px 0}
+.sl{font-size:.68em;font-weight:700;text-transform:uppercase;color:#f4d03f;letter-spacing:.5px;margin-bottom:3px}
+.sc{font-size:.84em;color:#ddd;line-height:1.5}
+.fact{background:rgba(100,200,180,.07);border-left:3px solid #5ec6b4;padding:7px 11px;border-radius:0 8px 8px 0;font-size:.78em;color:#9be;line-height:1.5;margin-bottom:9px}
+.wbox{text-align:center;padding:14px;background:rgba(244,208,63,.04);border:1px dashed #f4d03f33;border-radius:10px;margin-bottom:12px}
+.wchr{font-size:5.5em;color:#f4d03f77;line-height:1;margin-bottom:5px}
+.wdir{font-size:.72em;color:#f4d03f;font-weight:600;text-transform:uppercase}
+.sl2{list-style:none;display:flex;flex-direction:column;gap:6px}
+.si{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;background:rgba(255,255,255,.03);border-radius:8px}
+.sn{background:#f4d03f;color:#000;font-weight:700;font-size:.76em;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.st{font-size:.82em;color:#ddd;line-height:1.4}
+.tip{margin-top:10px;font-size:.73em;color:#888;padding:7px 9px;background:rgba(255,255,255,.03);border-radius:8px;line-height:1.5}
+.qch{font-size:4.5em;text-align:center;color:#f4d03f;margin:8px 0;text-shadow:0 0 26px rgba(244,208,63,.3)}
+.qpr{text-align:center;font-size:.84em;color:#bbb;margin-bottom:12px}
+.qog{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+.qo{padding:10px 7px;background:rgba(255,255,255,.05);border:1.5px solid #ffffff20;border-radius:9px;color:#ddd;font-size:.95em;cursor:pointer;transition:all .16s;font-family:inherit;text-align:center}
+.qo:hover:not(:disabled){background:rgba(244,208,63,.1);border-color:#f4d03f88;color:#f4d03f}
+.qo.ok{background:rgba(46,204,113,.15);border-color:#2ecc71;color:#2ecc71}
+.qo.no{background:rgba(231,76,60,.15);border-color:#e74c3c;color:#e74c3c}
+.qo:disabled{cursor:default;opacity:.7}
+.qfb{text-align:center;font-size:.88em;min-height:20px;margin-bottom:7px;font-weight:600}
+.qsc{text-align:center;font-size:.75em;color:#888}
+.qnb{display:none;width:100%;padding:9px;background:linear-gradient(135deg,#f4d03f,#e67e22);color:#000;border:none;border-radius:9px;font-size:.9em;font-weight:700;cursor:pointer;margin-top:8px;font-family:inherit}
+.abtn{display:block;width:100%;padding:9px;background:linear-gradient(135deg,#f4d03f,#e67e22);color:#000;border:none;border-radius:9px;font-size:.92em;font-weight:700;cursor:pointer;transition:all .18s;margin-bottom:5px;font-family:inherit}
+.abtn:hover{transform:scale(1.02);box-shadow:0 4px 14px rgba(244,208,63,.3)}
+.aw{display:none;justify-content:center;align-items:center;gap:3px;height:26px;margin-bottom:5px}
+.aw.go{display:flex}
+.wb{width:4px;background:#f4d03f;border-radius:2px;animation:wv .8s ease-in-out infinite}
+.wb:nth-child(2){animation-delay:.1s}.wb:nth-child(3){animation-delay:.2s}
+.wb:nth-child(4){animation-delay:.3s}.wb:nth-child(5){animation-delay:.4s}
+@keyframes wv{0%,100%{height:5px}50%{height:20px}}
+.nr{display:flex;gap:7px;margin-top:7px}
+.nb{flex:1;padding:7px;background:rgba(244,208,63,.08);color:#f4d03f;border:1px solid #f4d03f33;border-radius:8px;cursor:pointer;font-size:.8em;transition:all .15s;font-family:inherit}
+.nb:hover{background:rgba(244,208,63,.18)}
+.lb{width:100%;margin-top:5px;padding:7px;background:transparent;border:1px solid #2ecc7155;border-radius:8px;color:#2ecc71;font-size:.78em;cursor:pointer;font-family:inherit;transition:all .15s}
+.lb:hover{background:rgba(46,204,113,.1)}.lb.mk{background:rgba(46,204,113,.15);border-color:#2ecc71}
+.pg{font-size:.7em;color:#666;text-align:center;margin-top:7px}
+
+/* ── Standalone Quiz Mode ── */
+.qov2{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:1000;justify-content:center;align-items:center;padding:16px}
+.qov2.open{display:flex}
+.qmd2{background:linear-gradient(155deg,#0e0e24,#1a1a40);border:2px solid #f4d03f;border-radius:20px;width:100%;max-width:450px;padding:22px 20px 18px;animation:pop .25s ease}
+.qhdr2{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.qttl2{font-size:.7em;color:#888;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.qscr2{font-size:.78em;color:#f4d03f;font-weight:700;margin-top:2px}
+.qcls2{background:none;border:none;color:#666;font-size:1.3em;cursor:pointer;padding:0}
+.qcls2:hover{color:#f4d03f}
+.qlives2{display:flex;gap:5px;justify-content:center;margin-bottom:10px;font-size:1.1em}
+.qhrt{transition:all .3s}.qhrt.lost{filter:grayscale(1);opacity:.25}
+.qtbar{height:5px;background:#1a1a30;border-radius:3px;margin-bottom:16px;overflow:hidden}
+.qtfill{height:100%;background:linear-gradient(90deg,#2ecc71,#f4d03f,#e74c3c);border-radius:3px;transition:width linear}
+.qmode2{text-align:center;font-size:.62em;color:#666;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.qbig2{text-align:center;color:#f4d03f;line-height:1.1;margin:8px 0 12px;text-shadow:0 0 40px rgba(244,208,63,.35);min-height:1.2em}
+.qask2{text-align:center;font-size:.8em;color:#bbb;margin-bottom:16px}
+.qopts2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+.qo2{padding:13px 8px;background:rgba(255,255,255,.05);border:1.5px solid #ffffff15;border-radius:10px;color:#ddd;font-size:1em;cursor:pointer;transition:all .17s;font-family:inherit;text-align:center;line-height:1.2}
+.qo2:hover:not(:disabled){background:rgba(244,208,63,.12);border-color:#f4d03f88;color:#f4d03f;transform:scale(1.03)}
+.qo2.ok2{background:rgba(46,204,113,.2);border-color:#2ecc71;color:#2ecc71;font-weight:700}
+.qo2.no2{background:rgba(231,76,60,.2);border-color:#e74c3c;color:#e74c3c}
+.qo2:disabled{cursor:default}
+.qfb3{text-align:center;font-size:.9em;min-height:22px;font-weight:700;margin-bottom:10px}
+.qstat2{display:flex;justify-content:center;gap:18px;font-size:.76em;color:#777}
+.qstat2 strong{color:#f4d03f}
+.qendscr{display:none;text-align:center;padding:8px 0}
+.qendscr.show{display:block}
+.qendemoji{font-size:3.5em;margin-bottom:8px}
+.qendmsg{font-size:1.1em;color:#f4d03f;font-weight:700;margin-bottom:4px}
+.qendsub{font-size:.78em;color:#888;margin-bottom:18px;line-height:1.6}
+.qrst{width:100%;padding:11px;background:linear-gradient(135deg,#f4d03f,#e67e22);color:#000;border:none;border-radius:10px;font-size:.92em;font-weight:700;cursor:pointer;font-family:inherit}
+.qrst:hover{transform:scale(1.02)}
+
+/* Look-Alikes tab */
+.larow{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.lacard{display:flex;flex-direction:column;align-items:center;padding:10px 8px;background:rgba(244,208,63,.05);border:1.5px solid #f4d03f22;border-radius:10px;cursor:pointer;transition:all .15s;flex:1;min-width:65px;text-align:center}
+.lacard:hover{border-color:#f4d03f;background:rgba(244,208,63,.12);transform:scale(1.05)}
+.lachr{font-size:2.2em;color:#f4d03f;line-height:1.1;margin-bottom:2px}
+.larom{font-size:.82em;color:#5dade2;font-style:italic;font-weight:600}
+.lanote{font-size:.68em;color:#888;line-height:1.4;margin-top:6px;padding:5px 7px;background:rgba(255,255,255,.03);border-radius:6px;width:100%;text-align:left}
+.nocnf{font-size:.82em;color:#555;text-align:center;padding:24px 0}
+/* Memory Match */
+.mmo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:1001;padding:16px;flex-direction:column;align-items:center}
+.mmo.open{display:flex}
+.mmhdr{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:520px;margin-bottom:10px}
+.mmttl{font-size:.9em;font-weight:700;color:#f4d03f}
+.mmst{display:flex;gap:14px;font-size:.76em;color:#888}
+.mmst strong{color:#f4d03f}
+.mmcls{background:none;border:none;color:#666;font-size:1.3em;cursor:pointer}
+.mmcls:hover{color:#f4d03f}
+.mmdiff{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
+.mmdbt{padding:5px 13px;background:#111;border:1.5px solid #f4d03f33;border-radius:20px;color:#888;font-size:.73em;cursor:pointer;font-family:inherit;transition:all .15s}
+.mmdbt.on,.mmdbt:hover{background:#f4d03f22;border-color:#f4d03f;color:#f4d03f}
+.mmgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;width:100%;max-width:520px}
+.mmc{height:70px;cursor:pointer;perspective:700px}
+.mmc-in{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .38s ease}
+.mmc.flipped .mmc-in,.mmc.matched .mmc-in{transform:rotateY(180deg)}
+.mmc-f,.mmc-b{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;border:2px solid transparent}
+.mmc-f{background:linear-gradient(135deg,#1a1a3e,#12122a);border-color:#f4d03f22;font-size:1.6em;color:#f4d03f33}
+.mmc-f::after{content:'?'}
+.mmc-b{background:linear-gradient(135deg,#12122a,#0e0e24);border-color:#f4d03f55;transform:rotateY(180deg)}
+.mmc-b.tc{font-size:2em;color:#f4d03f}
+.mmc-b.rc{font-size:.95em;color:#5dade2;padding:4px;line-height:1.2;text-align:center;font-weight:600}
+.mmc.matched .mmc-b{border-color:#2ecc71;background:rgba(46,204,113,.1)}
+.mmc.matched .mmc-f{border-color:#2ecc71}
+.mmc.wrong .mmc-in{animation:mshk .35s ease}
+@keyframes mshk{0%,100%{transform:rotateY(180deg)}30%{transform:rotateY(180deg) translateX(-6px)}70%{transform:rotateY(180deg) translateX(6px)}}
+.mmwin{display:none;text-align:center;padding:16px 0;width:100%;max-width:520px}
+.mmwin.show{display:block}
+.mmwemoji{font-size:3.5em;margin-bottom:8px}
+.mmwmsg{font-size:1em;color:#f4d03f;font-weight:700;margin-bottom:4px}
+.mmwsub{font-size:.78em;color:#888;margin-bottom:18px;line-height:1.6}
+.mmrst{padding:10px 28px;background:linear-gradient(135deg,#f4d03f,#e67e22);color:#000;border:none;border-radius:10px;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit}
+.mmrst:hover{transform:scale(1.02)}
+
+/* ── Feedback Widget ── */
+.fbk-btn{position:fixed;bottom:22px;right:22px;z-index:998;background:linear-gradient(135deg,#f4d03f,#e67e22);color:#000;border:none;border-radius:50px;padding:10px 18px;font-size:.8em;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(244,208,63,.45);font-family:inherit;transition:all .2s}
+.fbk-btn:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(244,208,63,.55)}
+.fbk-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1002;justify-content:center;align-items:center;padding:16px}
+.fbk-ov.open{display:flex}
+.fbk-md{background:linear-gradient(155deg,#12122a,#1a1a3e);border:2px solid #f4d03f;border-radius:18px;max-width:420px;width:100%;padding:22px 20px 18px;animation:pop .2s ease;max-height:92vh;overflow-y:auto}
+.fbk-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.fbk-h{font-size:.95em;font-weight:700;color:#f4d03f}
+.fbk-sub{font-size:.72em;color:#777;margin-top:2px}
+.fbk-cls{background:none;border:none;color:#666;font-size:1.3em;cursor:pointer;padding:0}
+.fbk-cls:hover{color:#f4d03f}
+.fbk-lbl{font-size:.68em;color:#aaa;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:block;margin-top:10px}
+.fbk-inp,.fbk-sel,.fbk-ta{width:100%;background:#0d0d22;border:1.5px solid #f4d03f28;border-radius:8px;color:#ddd;padding:8px 11px;font-size:.83em;font-family:inherit;outline:none;box-sizing:border-box}
+.fbk-inp:focus,.fbk-sel:focus,.fbk-ta:focus{border-color:#f4d03f66}
+.fbk-sel option{background:#0d0d22}
+.fbk-ta{resize:vertical;min-height:68px}
+.fbk-stars{display:flex;gap:8px;font-size:1.7em;cursor:pointer;margin-top:6px;margin-bottom:2px}
+.fbk-star{color:#333;transition:color .12s;user-select:none}
+.fbk-star.on{color:#f4d03f}
+.fbk-chk{display:flex;align-items:center;gap:8px;margin-top:10px;margin-bottom:4px;font-size:.8em;color:#aaa;cursor:pointer}
+.fbk-chk input{accent-color:#f4d03f;width:15px;height:15px}
+.fbk-sbtn{width:100%;padding:10px;background:linear-gradient(135deg,#f4d03f,#e67e22);color:#000;border:none;border-radius:9px;font-size:.88em;font-weight:700;cursor:pointer;font-family:inherit;margin-top:14px}
+.fbk-sbtn:hover{transform:scale(1.02)}
+.fbk-ok{display:none;text-align:center;padding:24px 0}
+.fbk-ok.show{display:block}
+.fbk-ok-emoji{font-size:3em;margin-bottom:10px}
+.fbk-ok-msg{color:#f4d03f;font-weight:700;font-size:.95em;margin-bottom:4px}
+.fbk-ok-sub{color:#777;font-size:.77em}
+.fbk-err{font-size:.72em;color:#e74c3c;margin-top:6px;display:none}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>தமிழ் எழுத்துக்கள் — 247</h1>
+  <p>Interactive Tamil Alphabet Learning Chart &nbsp;|&nbsp; Click any character to explore</p>
+  <div class="stats">
+    <span class="chip">📖 <span id="expC">0</span>/247 Explored</span>
+    <span class="chip">✅ <span id="lrnC">0</span> Learned</span>
+    <span class="chip">🎯 Quiz: <span id="qzS">—</span></span>
+  </div>
+</div>
+<div class="toolbar">
+  <input class="search" id="sb" type="text" placeholder="🔍 Search character or romanization…" oninput="flt(this.value)">
+  <button class="fbtn on" onclick="setF('all',this)">All 247</button>
+  <button class="fbtn" onclick="setF('vowel',this)">Vowels</button>
+  <button class="fbtn" onclick="setF('Hard',this)">Hard (வல்)</button>
+  <button class="fbtn" onclick="setF('Soft',this)">Soft (மெல்)</button>
+  <button class="fbtn" onclick="setF('Middle',this)">Middle (இடை)</button>
+  <button class="fbtn" style="background:linear-gradient(135deg,#f4d03f22,#e67e2211);border-color:#f4d03f88;color:#f4d03f" onclick="startQuiz()">🎯 Challenge Quiz</button>
+  <button class="fbtn" style="background:linear-gradient(135deg,#5dade222,#2980b911);border-color:#5dade288;color:#5dade2" onclick="openMM()">🃏 Memory Match</button>
+</div>
+<div class="legend">
+  <div class="li"><div class="ld" style="background:#f4d03f"></div>Vowels / உயிர் (12) + ஃ Āyuta Eḻuttu</div>
+  <div class="li"><div class="ld" style="background:#c0504d"></div>Hard / வல்லினம் — க ச ட த ப ற</div>
+  <div class="li"><div class="ld" style="background:#4a90c4"></div>Soft / மெல்லினம் — ங ஞ ண ந ம ன</div>
+  <div class="li"><div class="ld" style="background:#9b70c8"></div>Middle / இடையினம் — ய ர ல வ ழ ள</div>
+  <div class="li"><div class="ld" style="background:#cc99ff"></div>Pure Consonants / மெய் (18)</div>
+  <div class="li"><div class="ld" style="background:#2ecc71"></div>✓ Learned</div>
+</div>
+<div class="gw"><table id="tbl"></table></div>
+<div class="ov" id="ov" onclick="ovc(event)">
+ <div class="md">
+  <div class="mh">
+   <button class="mcl" onclick="cls()">✕</button>
+   <div class="mchr" id="mC">அ</div>
+   <div class="br"><span class="bg" id="mB">Vowel</span></div>
+   <span class="rom" id="mR">a</span>
+   <div class="ipa" id="mI">/a/</div>
+   <div class="ctag" id="mT"></div>
+  </div>
+  <div class="tabs">
+   <button class="tab on" onclick="stab('info',this)">📋 Overview</button>
+   <button class="tab" onclick="stab('write',this)">✍️ Write</button>
+   <button class="tab" onclick="stab('look',this)">👁 Look-Alikes</button>
+  </div>
+  <div class="panels">
+   <div class="pn on" id="pn-info">
+    <div class="comps" id="mCp" style="display:none"></div>
+    <div class="sec"><div class="sl">🔉 Pronunciation</div><div class="sc" id="mP"></div></div>
+    <div class="sec"><div class="sl">📝 Examples</div><div class="sc" id="mE"></div></div>
+    <div class="fact" id="mF"></div>
+    <div class="aw" id="aw1"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+    <button class="abtn" onclick="pa()">🔊 Listen to Pronunciation</button>
+    <button class="lb" id="lbtn" onclick="togL()">☐ Mark as Learned</button>
+    <div class="nr"><button class="nb" onclick="nav(-1)">← Prev</button><button class="nb" onclick="nav(1)">Next →</button></div>
+    <div class="pg" id="mpg"></div>
+   </div>
+   <div class="pn" id="pn-write">
+    <div class="wbox"><div class="wchr" id="wC">அ</div><div class="wdir" id="wD"></div></div>
+    <ul class="sl2" id="wSt"></ul>
+    <div class="tip" id="wTp"></div>
+    <div class="aw" id="aw2"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+    <button class="abtn" style="margin-top:10px" onclick="pa()">🔊 Listen</button>
+    <div class="nr"><button class="nb" onclick="nav(-1)">← Prev</button><button class="nb" onclick="nav(1)">Next →</button></div>
+   </div>
+   <div class="pn" id="pn-look">
+    <div class="sec" style="margin-bottom:10px"><div class="sl">👁 Commonly Confused With</div><div style="font-size:.72em;color:#666;margin-top:2px">Click any character to explore it</div></div>
+    <div id="laContent"><div class="nocnf">No confusable characters listed for this one.</div></div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="qov2" id="qov2" onclick="qov2click(event)">
+ <div class="qmd2">
+  <div class="qhdr2">
+   <div><div class="qttl2">🎯 Tamil Challenge Quiz</div><div class="qscr2" id="qscr2t">Score: 0 &nbsp;|&nbsp; Best streak: 0🔥</div></div>
+   <button class="qcls2" onclick="closeQuiz()">✕</button>
+  </div>
+  <div class="qlives2" id="qlives2">❤️❤️❤️</div>
+  <div class="qtbar"><div class="qtfill" id="qtfill" style="width:100%"></div></div>
+  <div id="qgame2">
+   <div class="qmode2" id="qmode2t"></div>
+   <div class="qbig2" id="qbig2t" style="font-size:5.5em"></div>
+   <div class="qask2" id="qask2t"></div>
+   <div class="qopts2" id="qopts2t"></div>
+   <div class="qfb3" id="qfb3t"></div>
+   <div class="qstat2">
+    <span>✅ <strong id="qcort">0</strong> correct</span>
+    <span>🔥 <strong id="qstrt">0</strong> streak</span>
+    <span>📊 <strong id="qtott">0</strong> total</span>
+   </div>
+  </div>
+  <div class="qendscr" id="qendscr">
+   <div class="qendemoji" id="qendemoji">🎉</div>
+   <div class="qendmsg" id="qendmsg"></div>
+   <div class="qendsub" id="qendsub"></div>
+   <button class="qrst" onclick="startQuiz()">Play Again 🔄</button>
+  </div>
+ </div>
+</div>
+
+<div class="mmo" id="mmo" onclick="mmovclick(event)">
+ <div class="mmhdr">
+  <div class="mmttl">🃏 Memory Match</div>
+  <div class="mmst">⏱ <strong id="mmtm">0:00</strong> &nbsp; 🔀 <strong id="mmmv">0</strong> moves &nbsp; ✅ <strong id="mmpr">0</strong>/8</div>
+  <button class="mmcls" onclick="closeMM()">✕</button>
+ </div>
+ <div class="mmdiff">
+  <button class="mmdbt on" onclick="setMD('vowels',this)">Vowels</button>
+  <button class="mmdbt" onclick="setMD('hard',this)">Hard</button>
+  <button class="mmdbt" onclick="setMD('soft',this)">Soft</button>
+  <button class="mmdbt" onclick="setMD('middle',this)">Middle</button>
+  <button class="mmdbt" onclick="setMD('mix',this)">Mix 🎲</button>
+ </div>
+ <div class="mmgrid" id="mmgrid"></div>
+ <div class="mmwin" id="mmwin">
+  <div class="mmwemoji" id="mmwemoji">🎉</div>
+  <div class="mmwmsg" id="mmwmsg"></div>
+  <div class="mmwsub" id="mmwsub"></div>
+  <button class="mmrst" onclick="startMM()">Play Again 🔄</button>
+ </div>
+</div>
+
+<script>
+const VOWELS=[
+ {char:'அ',matra:'',roman:'a',ipa:'/ə/',type:'vowel',pron:'Short "a" like "u" in cup. The base vowel — every consonant carries this unless suppressed.',ex:'அம்மா (ammā) — mother | அழகு (aḻaku) — beauty',stroke:'① Arc right from top-center\n② Pull back down-left\n③ Add hook at top-right',dir:'Arc right → Down-left → Hook',tip:'Looks like a reversed 9 with a hook. Practice the arc first.',fact:'Every Tamil consonant automatically carries the "a" vowel — this inherent vowel principle is shared by all Indian scripts.'},
+ {char:'ஆ',matra:'ா',roman:'ā',ipa:'/aː/',type:'vowel',pron:'Long "a" like in "father". Held twice as long as அ.',ex:'ஆடு (āḍu) — goat | ஆகாயம் (ākāyam) — sky',stroke:'① Draw அ shape\n② Add vertical downstroke on right side',dir:'அ shape → Vertical right extension',tip:'Think: அ with a tail. Longer tail = longer sound.',fact:'Tamil vowel length is phonemic — short vs. long changes word meaning entirely.'},
+ {char:'இ',matra:'ி',roman:'i',ipa:'/i/',type:'vowel',pron:'Short "i" like in "bit". Front high vowel, lips slightly spread.',ex:'இலை (ilai) — leaf | இதயம் (itayam) — heart',stroke:'① Small curved top arc\n② Descend vertically\n③ Hook inward at bottom',dir:'Top curve → Vertical → Bottom hook',tip:'Simpler than most vowels. Focus on the small top curve.',fact:'இ and ஈ together represent the front high vowel — tongue high and forward in the mouth.'},
+ {char:'ஈ',matra:'ீ',roman:'ī',ipa:'/iː/',type:'vowel',pron:'Long "ee" like in "feet". Held longer than இ.',ex:'ஈ (ī) — fly | ஈர்ப்பு (īrppu) — gravity',stroke:'① Draw இ shape\n② Add parallel stroke to the right',dir:'இ shape → Parallel right stroke',tip:'ஈ = இ doubled. Same curves, mirrored side by side.',fact:'The doubling pattern (இ→ஈ, உ→ஊ) is consistent across all Tamil short-long vowel pairs.'},
+ {char:'உ',matra:'ு',roman:'u',ipa:'/u/',type:'vowel',pron:'Short "u" like "oo" in "book". Lips slightly rounded.',ex:'உப்பு (uppu) — salt | உணவு (uṇavu) — food',stroke:'① Backward C-curve from top-right\n② Loop inward at bottom-left',dir:'Right → Curve left → Loop in',tip:'A scooping motion — like a cupped hand.',fact:'உ is one of the three primary vowels in Tamil poetic grammar along with அ and இ.'},
+ {char:'ஊ',matra:'ூ',roman:'ū',ipa:'/uː/',type:'vowel',pron:'Long "oo" like in "food". Held longer than உ.',ex:'ஊர் (ūr) — village | ஊசி (ūci) — needle',stroke:'① Draw உ shape\n② Extend bottom curl further and wider',dir:'உ shape → Deeper wider curl',tip:'ஊ is உ with a more elaborate, extended curl.',fact:'ஊர் (village) is one of the oldest Tamil words, found in Sangam literature over 2,000 years ago.'},
+ {char:'எ',matra:'ெ',roman:'e',ipa:'/e/',type:'vowel',pron:'Short "e" like in "let". Mid-front vowel.',ex:'எலி (eli) — rat | எழுத்து (eḻuttu) — letter/writing',stroke:'① Small curve at top-right\n② Horizontal crossbar through middle\n③ Downward curve from left end',dir:'Top curve → Crossbar → Down-left',tip:'Like a backwards E with curved strokes.',fact:'எழுத்து (letter/writing) contains this vowel — the word for writing begins with எ.'},
+ {char:'ஏ',matra:'ே',roman:'ē',ipa:'/eː/',type:'vowel',pron:'Long "e" like "ay" in "say". Held longer than எ.',ex:'ஏணி (ēṇi) — ladder | ஏழு (ēḻu) — seven',stroke:'① Draw எ shape\n② Extend and open the top arc',dir:'எ shape → Extended open top arc',tip:'ஏ is a more sweeping, open version of எ.',fact:'ஏழு (seven) is the number of musical notes in Tamil classical music.'},
+ {char:'ஐ',matra:'ை',roman:'ai',ipa:'/ai̯/',type:'vowel',pron:'Diphthong "ai" gliding a→i. Like "ai" in "aisle".',ex:'ஐந்து (aintu) — five | ஐயம் (aiyam) — doubt',stroke:'① Two parallel descending curves\n② Both start from same top level\n③ Left curve then right curve',dir:'Twin parallel descending curves',tip:'Think "two eyes" — two side-by-side curves.',fact:'ஐ is a diphthong — a blend of அ+இ. Tamil poetry uses it for its pleasing glide.'},
+ {char:'ஒ',matra:'ொ',roman:'o',ipa:'/o/',type:'vowel',pron:'Short "o" like in "hot". Back rounded vowel.',ex:'ஒன்று (oṉṟu) — one | ஒளி (oḷi) — light',stroke:'① Small circular loop at top\n② Extend downward\n③ Curve back left (hook)',dir:'Top loop → Down → Left hook',tip:'The top loop is the key. Keep it small and tight.',fact:'ஒலி (sound) and ஒளி (light) — Tamil uses this vowel for fundamental natural phenomena.'},
+ {char:'ஓ',matra:'ோ',roman:'ō',ipa:'/oː/',type:'vowel',pron:'Long "o" like in "go". Held longer than ஒ.',ex:'ஓடு (ōḍu) — run | ஓவியம் (ōviyam) — painting',stroke:'① Draw ஒ shape\n② Add extending tail to the right',dir:'ஒ shape → Right-side tail',tip:'ஓ = ஒ + a tail that stretches like the long sound.',fact:'ஓ! is a Tamil exclamation — the long "oh" of surprise uses the long vowel naturally.'},
+ {char:'ஔ',matra:'ௌ',roman:'au',ipa:'/au̯/',type:'vowel',pron:'Diphthong "au" gliding a→u. Like "ou" in "out".',ex:'ஔவை (Auvai) — great ancient poet | ஔடதம் — medicine',stroke:'① ஒ base shape\n② Add right extension like ஓ\n③ Add second distinguishing mark',dir:'ஒ shape → Right extension → Extra mark',tip:'Rarest vowel. ஔ = ஒ with two right-side elements.',fact:'ஔவை, one of Tamil\'s greatest poets, has this rare vowel in her name.'},
+];
+const AYU={char:'ஃ',roman:'ḵ',ipa:'/x/',type:'ayutham',pron:'Rare fricative used before க,ச,ட,த,ப in loanwords and archaic texts. Like a soft "kh".',ex:'அஃது (aḵtu) — that (archaic) | ஃபோன் — phone',stroke:'① Top dot\n② Middle dot\n③ Bottom dot — three equidistant vertical dots',dir:'Three vertical dots top to bottom',tip:'Simplest Tamil character — three equally-spaced dots.',fact:'ஃ is the Āyuta Eḻuttu (ஆயுத எழுத்து) — the "weapon letter". It is neither vowel nor consonant, a unique third category found only in Tamil script. Classical grammarians called it Āytam; it stands alone as Tamil\'s most distinctive character.'};
+const CONS=[
+ {char:'க',pure:'க்',roman:'k/g',ipa:'/k/,/g/',cat:'Hard',catT:'வல்லினம்',pron:'"k" word-initially; softens to "g" between vowels.',ex:'கல் (kal) — stone | கோயில் (kōyil) — temple',stroke:'① Curved arc at top rightward\n② Stroke back down-left\n③ Inward curl at bottom',dir:'Arc right → Back left → Bottom curl',tip:'Arc + curl is க\'s signature. Most common Tamil consonant.',fact:'க alone can represent /k/, /g/, or /x/ depending on position — one letter, three sounds.'},
+ {char:'ங',pure:'ங்',roman:'ṅ',ipa:'/ŋ/',cat:'Soft',catT:'மெல்லினம்',pron:'Velar nasal "ng" as in "singing". Never begins a Tamil word.',ex:'மங்கை (maṅkai) — young woman | இங்கு (iṅku) — here',stroke:'① Loop at top\n② Descend from loop\n③ Curve back left at bottom',dir:'Top loop → Down → Curve left',tip:'ங only follows க. Rarest Tamil consonant in practice.',fact:'ங is so rare it has no standalone words — always appears after க.'},
+ {char:'ச',pure:'ச்',roman:'c/s',ipa:'/t͡ɕ/,/s/',cat:'Hard',catT:'வல்லினம்',pron:'"ch" at word start; "s" in middle/end. Same letter, two sounds!',ex:'சூரியன் (cūriyaṉ) — sun | செய்தி (ceiti) — news',stroke:'① Hook at top-right\n② Sweep down-left\n③ Bottom leftward tail',dir:'Top hook → Left sweep → Tail',tip:'ச changes sound by position — context is everything!',fact:'ச represents 3 different phonemes (/c/, /s/, /j/) — more than almost any other Tamil letter.'},
+ {char:'ஞ',pure:'ஞ்',roman:'ñ',ipa:'/ɲ/',cat:'Soft',catT:'மெல்லினம்',pron:'Palatal nasal — "ny" in canyon or Spanish ñ. Only follows ச.',ex:'ஞாயிறு (ñāyiṟu) — Sunday | ஞானம் (ñāṉam) — wisdom',stroke:'① Horizontal top bar\n② Two descending verticals\n③ Curved bottom strokes',dir:'Top bar → Twin verticals → Bottom curves',tip:'Square arch with top bar — unique angular Tamil consonant.',fact:'ஞானம் (wisdom) begins with ஞ — this sound is associated with knowledge in Tamil culture.'},
+ {char:'ட',pure:'ட்',roman:'ṭ',ipa:'/ʈ/,/ɖ/',cat:'Hard',catT:'வல்லினம்',pron:'Retroflex stop — tongue curls back to palate. Heavier "T" than English.',ex:'கோட்டை (kōṭṭai) — fort | இட்லி (iṭli) — idli',stroke:'① Curved top bar rightward\n② Vertical stroke down\n③ Slight backward curl at bottom',dir:'Curved top → Vertical → Backward curl',tip:'The curl reminds you of the curled-back tongue position.',fact:'Tamil has 3 distinct "t" sounds (த,ட,ற) and 3 "n" sounds (ந,ண,ன) — unmatched in most languages.'},
+ {char:'ண',pure:'ண்',roman:'ṇ',ipa:'/ɳ/',cat:'Soft',catT:'மெல்லினம்',pron:'Retroflex nasal — tongue curls back for "n". Distinct from dental ந and alveolar ன.',ex:'கண் (kaṇ) — eye | மண் (maṇ) — soil | அண்ணன் (aṇṇaṉ) — elder brother',stroke:'① Circular loop\n② Tail extending down on right\n③ Slight curl at tail bottom',dir:'Circle loop → Right tail → Curl',tip:'Looks like a lasso — a loop with a descending tail.',fact:'கண் (eye) uses retroflex ண — the word for sight is felt in the tongue\'s curled position.'},
+ {char:'த',pure:'த்',roman:'t/d',ipa:'/t̪/,/d̪/',cat:'Hard',catT:'வல்லினம்',pron:'Dental stop — tongue at the teeth. Softer than English "t".',ex:'தாய் (tāy) — mother | தமிழ் (tamiḻ) — Tamil',stroke:'① Horizontal crossbar at top\n② Two parallel verticals hanging down\n③ Curved base connecting them',dir:'Crossbar → Twin verticals → Curved base',tip:'Like the Greek letter π with a curved bottom.',fact:'தமிழ் (Tamil) begins with dental த — the language encodes itself with the softest "t".'},
+ {char:'ந',pure:'ந்',roman:'n',ipa:'/n̪/',cat:'Soft',catT:'மெல்லினம்',pron:'Dental nasal — tongue at teeth. Distinct from retroflex ண and alveolar ன.',ex:'நாய் (nāy) — dog | நன்றி (naṉṟi) — thank you',stroke:'① Fish-hook shape from top\n② Curve right and descend\n③ Downward tail',dir:'Top → Right arc → Descend → Tail',tip:'Fluid fish-hook curve. No sharp angles.',fact:'நன்றி (thank you) uses dental ந — gratitude expressed with the gentlest nasal sound.'},
+ {char:'ப',pure:'ப்',roman:'p/b',ipa:'/p/,/b/',cat:'Hard',catT:'வல்லினம்',pron:'"p" word-initially; softens to "b" between vowels.',ex:'பூ (pū) — flower | புத்தகம் (puttakam) — book',stroke:'① Vertical stroke down\n② Rounded loop on right at mid-height\n③ Loop closes back to stem',dir:'Vertical → Right loop at middle',tip:'Like a reversed P with a rounded attached loop.',fact:'பூ (flower), பால் (milk), பறவை (bird) — ப begins Tamil\'s most beautiful nouns.'},
+ {char:'ம',pure:'ம்',roman:'m',ipa:'/m/',cat:'Soft',catT:'மெல்லினம்',pron:'Bilabial nasal, exactly like "m" in mother. Both lips close fully.',ex:'மரம் (maram) — tree | அம்மா (ammā) — mother',stroke:'① Curved top sweeping right\n② Circular loop on right\n③ Downward curved tail',dir:'Curve right → Right loop → Down tail',tip:'Like a cursive m but with a distinctive Tamil loop.',fact:'மனம் (mind) and மனிதன் (human) share root ம — Tamil links "m" sound to humanity itself.'},
+ {char:'ய',pure:'ய்',roman:'y',ipa:'/j/',cat:'Middle',catT:'இடையினம்',pron:'Palatal approximant — exactly like "y" in yes, year, you.',ex:'யானை (yāṉai) — elephant | யார் (yār) — who',stroke:'① Arching bridge shape at top\n② Descend both sides with curves\n③ Bottom hook or curl',dir:'Top arch → Both sides curve → Bottom hook',tip:'Symmetrical bridge at top. Think of a gateway.',fact:'யோகம் (yoga) begins with ய — connecting Tamil to Sanskrit\'s shared spiritual vocabulary.'},
+ {char:'ர',pure:'ர்',roman:'r',ipa:'/r/',cat:'Middle',catT:'இடையினம்',pron:'Alveolar flap — lighter than English "r". Like Spanish "r" in pero. Tongue taps briefly.',ex:'ரோஜா (rōjā) — rose | வாரம் (vāram) — week',stroke:'① Small curve at top-left\n② Descend with rightward curve\n③ Small outward loop at bottom-right',dir:'Top-left curve → Right descent → Bottom loop',tip:'ர has a fluid rolling quality matching its flap sound.',fact:'Tamil has two distinct "r" sounds: ர (lighter flap) and ற (heavier trill).'},
+ {char:'ல',pure:'ல்',roman:'l',ipa:'/l̪/',cat:'Middle',catT:'இடையினம்',pron:'Dental lateral — tongue at teeth. Distinct from retroflex ள. Like "l" in let.',ex:'கல் (kal) — stone | கலை (kalai) — art',stroke:'① Downward vertical stroke\n② Horizontal bar at top-right\n③ Leftward curve at bottom',dir:'Vertical → Top-right bar → Bottom-left curve',tip:'Angular and clean — a vertical with top hook and bottom curve.',fact:'Tamil distinguishes ல (dental), ள (retroflex), ழ (unique) — three distinct "l"-type sounds.'},
+ {char:'வ',pure:'வ்',roman:'v/w',ipa:'/ʋ/',cat:'Middle',catT:'இடையினம்',pron:'Labiodental approximant — between English "v" and "w". Teeth barely graze lower lip.',ex:'வீடு (vīḍu) — house | வானம் (vāṉam) — sky',stroke:'① Horizontal stroke at top\n② Two angled strokes descend (open M shape)\n③ Slight curve at bottom',dir:'Top bar → Two descending angles → Curve',tip:'Looks like a curvy W or M — apt for a v/w sound.',fact:'வா! (come!) is among the oldest Tamil imperatives — used for millennia.'},
+ {char:'ழ',pure:'ழ்',roman:'ḻ/zh',ipa:'/ɻ/',cat:'Middle',catT:'இடையினம்',pron:'UNIQUE TO TAMIL — Retroflex lateral approximant with no equivalent in any other world language.',ex:'தமிழ் (tamiḻ) — Tamil language | வாழ (vāḻa) — to live',stroke:'① Backward spiral from top\n② Unique curving shape unlike any other consonant\n③ Hook on right side',dir:'Backward spiral → Right hook (completely unique)',tip:'Must be heard to be learned. No English equivalent exists. Tongue curls far back.',fact:'ழ exists ONLY in Tamil and related Dravidian languages — the sonic signature of Tamil uniqueness.'},
+ {char:'ள',pure:'ள்',roman:'ḷ/L',ipa:'/ɭ/',cat:'Middle',catT:'இடையினம்',pron:'Retroflex lateral — tongue curls back for "l". Heavier and deeper than dental ல.',ex:'கள் (kaḷ) — many/toddy | ஆள் (āḷ) — person',stroke:'① Circular or oval loop\n② Extension stroke to the right\n③ Downward tail from bottom of loop',dir:'Circle → Right extension → Downward tail',tip:'A lasso with a right-pointing arm. Compare carefully with ண.',fact:'Tiruvaḷḷuvar, Tamil\'s greatest poet, has ள in his very name — woven into Tamil identity.'},
+ {char:'ற',pure:'ற்',roman:'ṟ',ipa:'/r/,/t̪/',cat:'Hard',catT:'வல்லினம்',pron:'Alveolar trill. Doubled (ற்ற) sounds like a strong trilled "t". Position-sensitive.',ex:'மற்று (maṟṟu) — other | நன்றி (naṉṟi) — thank you',stroke:'① Loop at top\n② Sweep downward with curve\n③ Distinctive outward tail at bottom-right',dir:'Top loop → Sweep down → Right-curving tail',tip:'Like ர but with a more dramatic outward bottom tail.',fact:'நன்றி (thank you) ends with ன+ற combination — gratitude in Tamil is phonetically complex!'},
+ {char:'ன',pure:'ன்',roman:'ṉ',ipa:'/n/',cat:'Soft',catT:'மெல்லினம்',pron:'Alveolar nasal — only at syllable-end or doubled. Tongue at the alveolar ridge.',ex:'நன்றி (naṉṟi) — thank you | அன்பு (aṉpu) — love',stroke:'① Arching stroke rightward at top\n② Descend on left side\n③ Rightward hook at bottom',dir:'Top arch right → Left descent → Bottom hook',tip:'A graceful arch. Never appears at word-start in classical Tamil.',fact:'அன்பு (love) ends with ன — Tamil\'s word for love fades softly with this gentle nasal.'},
+];
+const MATRAS=[
+ {m:'',v:'அ',r:'a'},{m:'ா',v:'ஆ',r:'ā'},{m:'ி',v:'இ',r:'i'},{m:'ீ',v:'ஈ',r:'ī'},
+ {m:'ு',v:'உ',r:'u'},{m:'ூ',v:'ஊ',r:'ū'},{m:'ெ',v:'எ',r:'e'},{m:'ே',v:'ஏ',r:'ē'},
+ {m:'ை',v:'ஐ',r:'ai'},{m:'ொ',v:'ஒ',r:'o'},{m:'ோ',v:'ஓ',r:'ō'},{m:'ௌ',v:'ஔ',r:'au'},
+];
+const CEX={
+ /* க combinations */
+ 'க':'கடல் (kaṭal) — sea | கரம் (karam) — hand',
+ 'கா':'காதல் (kādal) — love | காடு (kāḍu) — forest',
+ 'கி':'கிளி (kiḷi) — parrot | கிரீடம் (kirīḍam) — crown',
+ 'கீ':'கீரை (kīrai) — spinach | கீதம் (kītam) — hymn',
+ 'கு':'குதிரை (kutirai) — horse | குழந்தை (kuḻantai) — child',
+ 'கூ':'கூடு (kūḍu) — nest | கூட்டம் (kūṭṭam) — crowd',
+ 'கெ':'கெட்டி (keṭṭi) — strong/firm',
+ 'கே':'கேள்வி (kēḷvi) — question | கேக்கு (kēkku) — cake',
+ 'கை':'கை (kai) — hand | கைரேகை (kairēkai) — fingerprint',
+ 'கொ':'கொஞ்சம் (koñcam) — a little | கொழுப்பு (koḻuppu) — fat',
+ 'கோ':'கோயில் (kōyil) — temple | கோழி (kōḻi) — hen',
+ 'கௌ':'கௌரவம் (kauravam) — honour',
+ /* ச combinations */
+ 'ச':'சடை (caṭai) — matted hair | சமம் (camam) — equal',
+ 'சா':'சாப்பாடு (cāppāḍu) — meal | சாலை (cālai) — road',
+ 'சி':'சிறுவன் (ciṟuvaṉ) — boy | சிவப்பு (civappu) — red',
+ 'சீ':'சீடர் (cīḍar) — disciple | சீர் (cīr) — order',
+ 'சு':'சுவர் (cuvar) — wall | சுகம் (cukam) — comfort',
+ 'சூ':'சூரியன் (cūriyaṉ) — sun | சூடு (cūḍu) — heat',
+ 'செ':'செல்வம் (celvam) — wealth | செய்தி (ceiti) — news',
+ 'சே':'சேவை (cēvai) — service | சேர் (cēr) — to join',
+ 'சை':'சைவம் (caivam) — vegetarianism',
+ 'சொ':'சொல் (col) — word | சொர்க்கம் (corkam) — heaven',
+ 'சோ':'சோறு (cōṟu) — cooked rice | சோதனை (cōtaṉai) — test',
+ /* த combinations */
+ 'த':'தகவல் (takаval) — information | தரம் (taram) — quality',
+ 'தா':'தாய் (tāy) — mother | தாமரை (tāmarai) — lotus',
+ 'தி':'திரை (tirai) — film/wave | திறமை (tiṟamai) — talent',
+ 'தீ':'தீ (tī) — fire | தீர்வு (tīrvu) — solution',
+ 'து':'துணி (tuṇi) — cloth | துடிப்பு (tuḍippu) — pulse',
+ 'தூ':'தூக்கம் (tūkkam) — sleep | தூரம் (tūram) — distance',
+ 'தெ':'தெரிவு (terivु) — choice | தெரு (teru) — street',
+ 'தே':'தேன் (tēṉ) — honey | தேவன் (tēvaṉ) — god',
+ 'தை':'தைல் (tail) — oil | தைப்பூசம் (taippūcam) — Tamil festival',
+ 'தொ':'தொழில் (toḻil) — profession | தொடர் (toṭar) — series',
+ 'தோ':'தோல் (tōl) — skin/leather | தோட்டம் (tōṭṭam) — garden',
+ /* ந combinations */
+ 'ந':'நலம் (nalam) — well-being | நகரம் (nakaram) — city',
+ 'நா':'நாய் (nāy) — dog | நாடு (nāḍu) — country',
+ 'நி':'நிலவு (nilavu) — moon | நிறம் (niṟam) — colour',
+ 'நீ':'நீர் (nīr) — water | நீதி (nīti) — justice',
+ 'நு':'நுரை (nurai) — foam | நுழை (nuḻai) — to enter',
+ 'நெ':'நெஞ்சு (neñcu) — chest/heart | நெய் (ney) — ghee',
+ 'நே':'நேர்மை (nērmai) — honesty | நேரம் (nēram) — time',
+ 'நை':'நைந்து (naintu) — weakened',
+ 'நொ':'நொடி (noṭi) — moment/second',
+ 'நோ':'நோய் (nōy) — disease | நோக்கம் (nōkkam) — aim',
+ /* ப combinations */
+ 'ப':'பழம் (paḻam) — fruit | படம் (paṭam) — picture',
+ 'பா':'பால் (pāl) — milk | பாட்டு (pāṭṭu) — song',
+ 'பி':'பிள்ளை (piḷḷai) — child | பிரியம் (piriyam) — affection',
+ 'பீ':'பீடம் (pīḍam) — pedestal',
+ 'பு':'புலி (puli) — tiger | புகழ் (pukaḻ) — fame',
+ 'பூ':'பூ (pū) — flower | பூமி (pūmi) — earth',
+ 'பெ':'பெண் (peṇ) — woman | பெயர் (peyar) — name',
+ 'பே':'பேச்சு (pēccu) — speech | பேரன் (pēraṉ) — grandson',
+ 'பை':'பை (pai) — bag | பைந்தமிழ் — young Tamil',
+ 'பொ':'பொன் (poṉ) — gold | பொருள் (poruḷ) — meaning',
+ 'போ':'போக்கு (pōkku) — manner | போர் (pōr) — war',
+ /* ம combinations */
+ 'ம':'மரம் (maram) — tree | மனம் (maṉam) — mind',
+ 'மா':'மாமரம் (māmaram) — mango tree | மாலை (mālai) — evening',
+ 'மி':'மிளகு (miḷaku) — pepper | மிருகம் (mirukam) — animal',
+ 'மீ':'மீன் (mīṉ) — fish | மீண்டும் (mīṇḍum) — again',
+ 'மு':'முகம் (mukam) — face | முல்லை (mullai) — jasmine',
+ 'மூ':'மூக்கு (mūkku) — nose | மூன்று (mūṉṟu) — three',
+ 'மெ':'மெல்ல (mella) — slowly | மெழுகு (meḻuku) — wax',
+ 'மே':'மேசை (mēcai) — table | மேடை (mēḍai) — stage',
+ 'மை':'மை (mai) — ink/mascara | மைந்தன் (maintaṉ) — son',
+ 'மொ':'மொழி (moḻi) — language | மொட்டு (moṭṭu) — bud',
+ 'மோ':'மோதிரம் (mōtiram) — ring | மோர் (mōr) — buttermilk',
+ 'மௌ':'மௌனம் (maunam) — silence',
+ /* ய combinations */
+ 'ய':'யுகம் (yukam) — era | யோசி (yōci) — think',
+ 'யா':'யார் (yār) — who | யாழ் (yāḻ) — veena (instrument)',
+ 'யு':'யுகம் (yukam) — era',
+ 'யூ':'யூனியன் (yūṉiyaṉ) — union',
+ 'யே':'யேசு (yēcu) — Jesus/Yesu (name)',
+ 'யோ':'யோகம் (yōkam) — yoga | யோசி (yōci) — to think',
+ /* ர combinations */
+ 'ர':'ரசம் (rasam) — broth/rasam | ரவி (ravi) — sun',
+ 'ரா':'ராஜா (rājā) — king | ராத்திரி (rāttiri) — night',
+ 'ரி':'ரிஷி (riṣi) — sage',
+ 'ரீ':'ரீல் (rīl) — reel',
+ 'ரு':'ருசி (ruci) — taste/flavour',
+ 'ரூ':'ரூபாய் (rūpāy) — rupee | ரூபம் (rūpam) — form/shape',
+ 'ரெ':'ரெட் (reṭ) — red (loanword)',
+ 'ரே':'ரேடியோ (rēḍiyo) — radio | ரேகை (rēkai) — line/mark',
+ 'ரை':'ரைல் (rail) — rail (loanword)',
+ 'ரொ':'ரொட்டி (roṭṭi) — bread',
+ 'ரோ':'ரோஜா (rōjā) — rose | ரோடு (rōḍu) — road',
+ /* ல combinations */
+ 'ல':'கலம் (kalam) — vessel | கலை (kalai) — art',
+ 'லா':'லாபம் (lābam) — profit | லாவகம் — skill',
+ 'லி':'கலி (kali) — Kali Yuga | விலி — rare',
+ 'லீ':'லீலை (līlai) — divine play',
+ 'லெ':'லெமன் (lemon) — lemon (loanword)',
+ 'லே':'லேசு (lēcu) — easy/light | லேட் (lēṭ) — late',
+ 'லை':'கலை (kalai) — art | வலை (valai) — net',
+ 'லோ':'லோகம் (lōkam) — world | லோகேஷ் — name Lokesh',
+ /* வ combinations */
+ 'வ':'வழி (vaḻi) — way | வகை (vakai) — type',
+ 'வா':'வாழை (vāḻai) — banana | வாய் (vāy) — mouth',
+ 'வி':'விண்மீன் (viṇmīṉ) — star | விழி (viḻi) — eye',
+ 'வீ':'வீடு (vīḍu) — house | வீரம் (vīram) — bravery',
+ 'வெ':'வெள்ளை (veḷḷai) — white | வெயில் (veyil) — sunlight',
+ 'வே':'வேலை (vēlai) — work | வேர் (vēr) — root',
+ 'வை':'வைரம் (vairam) — diamond | வைப்பு (vaippu) — deposit',
+ /* ழ combinations */
+ 'ழ':'ஆழம் (āḻam) — depth | அழகு (aḻaku) — beauty',
+ 'ழி':'வழி (vaḻi) — way | கழி (kaḻi) — to pass',
+ 'ழு':'உழு (uḻu) — to plough',
+ 'ழை':'மழை (maḻai) — rain | வாழை (vāḻai) — banana',
+ /* ள combinations */
+ 'ள':'ஆளு (āḷu) — to rule | தளம் (taḷam) — floor',
+ 'ளி':'கிளி (kiḷi) — parrot | தெளி (teḷi) — to clear',
+ 'ளை':'தளை (taḷai) — bond | விளையாட்டு (viḷaiyāṭṭu) — game',
+ 'ளோ':'விளோ rare — see ள consonant page',
+ /* ற combinations */
+ 'ற':'உறவு (uṟavu) — relationship',
+ 'றி':'குறி (kuṟi) — sign/mark',
+ 'று':'ஆறு (āṟu) — river/six | நாறு (nāṟu) — to smell',
+ 'றை':'உறை (uṟai) — case/dwelling',
+ /* ன combinations */
+ 'ன':'நன்றி (naṉṟi) — thank you | அன்பு (aṉpu) — love',
+ 'னா':'தினா (tiṉā) — day (suffix)',
+ 'னி':'மணி (maṇi) — bell/jewel',
+ 'னு':'கனு (kanu) — rare',
+ 'னை':'கன்னை (kaṉṉai) — cheek | மன்னை (maṉṉai) — king (archaic)',
+};
+
+// Build master list
+const ALL=[];
+VOWELS.forEach(v=>ALL.push(v));
+ALL.push(AYU);
+CONS.forEach(c=>{
+ MATRAS.forEach((m,mi)=>{
+  const ch=c.char+m.m;
+  ALL.push({char:ch,type:'combined',roman:c.roman.split('/')[0]+m.r,ipa:'',
+   pron:c.char+' ('+c.roman+') + '+m.v+' ('+m.r+'). '+c.pron,
+   ex:CEX[ch]||(ch+': '+c.roman.split('/')[0]+m.r+' sound. '+c.ex.split('|')[0].trim()+' [↑ example uses this consonant]'),
+   stroke:'Write base consonant '+c.char+':\n'+c.stroke+'\n\nAdd vowel marker: '+(m.m||'(none — base gives the "a" vowel)'),
+   dir:c.dir+(m.m?' → add "'+m.m+'"':' (base form)'),
+   tip:'Marker '+(m.m||'(none)')+' = '+m.v+' ('+m.r+') sound.',
+   fact:'Write the consonant first, then attach the vowel marker '+(m.m?'"'+m.m+'"':'(none needed)')+'.',
+   consChar:c.char,vowChar:m.v,matra:m.m,cat:c.cat,catT:c.catT});
+ });
+ ALL.push({char:c.pure,type:'pure-consonant',roman:c.roman.split('/')[0],ipa:c.ipa,
+  pron:'Pure consonant — inherent "a" removed by pulli (்). '+c.pron,
+  ex:c.ex,stroke:'Write '+c.char+':\n'+c.stroke+'\n\nAdd ் (pulli) on top → silences the built-in "a" vowel.',
+  dir:c.dir+' → add ் (pulli)',tip:'The ் mark silences the built-in "a" vowel — a bare consonant.',
+  fact:'The pulli (்) is Tamil\'s virama mark — suppresses the inherent vowel to create a pure consonant.',
+  cat:c.cat,catT:c.catT});
+});
+
+// Table
+const CROW={Hard:'rh',Soft:'rs',Middle:'rm'};
+const EXP=new Set(),LRN=new Set();
+let AF='all';
+
+function buildTable(){
+ const tbl=document.getElementById('tbl');
+ let h='<tr><td class="cx">உயிர்மெய்</td>';
+ VOWELS.forEach((v,i)=>h+='<th class="hc" onclick="open_('+i+')" title="'+v.roman+'">'+v.char+'</th>');
+ h+='<th style="background:#cc99ff;color:#000;font-weight:700;min-width:44px">மெய்</th></tr>';
+ h+='<tr class="vrow"><td class="cx">உயிர்</td>';
+ VOWELS.forEach((v,i)=>h+='<td class="hc" onclick="open_('+i+')">'+v.char+'</td>');
+ h+='<td class="pc" id="c12" data-cat="ayutham" onclick="open_(12)">'+AYU.char+'</td></tr>';
+ tbl.innerHTML=h;
+ const catOrd={Hard:0,Soft:0,Middle:0};
+ CONS.forEach((c,ci)=>{
+  const ci_c=catOrd[c.cat]++;
+  // Hard: warm reds 0-45°, Soft: cool blues 195-240°, Middle: purples 270-315°
+  const hue=c.cat==='Hard'?0+ci_c*9:c.cat==='Soft'?195+ci_c*9:270+ci_c*9;
+  const bi=13+ci*13,rc=CROW[c.cat]||'';
+  let row='<tr class="'+rc+'"><td class="cx" title="'+c.catT+' — '+c.roman+'">'+c.char+'</td>';
+  MATRAS.forEach((m,mi)=>{
+   const idx=bi+mi,ch=c.char+m.m;
+   // Column 0(அ)→8% lightness, column 11(ஔ)→14% — vowel gradient across each row
+   const lum=(8+mi*0.55).toFixed(1);
+   const bg='hsl('+hue+',55%,'+lum+'%)';
+   row+='<td class="cc" id="c'+idx+'" data-ch="'+ch+'" data-rom="'+c.roman.split('/')[0]+m.r+'" data-cat="'+c.cat+'" onclick="open_('+idx+')" style="background:'+bg+'">'+ch+'</td>';
+  });
+  const pcbg='hsl('+hue+',35%,11%)';
+  row+='<td class="pc" id="c'+(bi+12)+'" data-ch="'+c.pure+'" data-rom="'+c.roman.split('/')[0]+'" data-cat="'+c.cat+'" onclick="open_('+(bi+12)+')" style="background:'+pcbg+'">'+c.pure+'</td></tr>';
+  tbl.innerHTML+=row;
+ });
+}
+
+function flt(q){
+ q=q.toLowerCase().trim();
+ document.querySelectorAll('[data-ch],[data-cat="ayutham"]').forEach(td=>{
+  const ch=(td.dataset.ch||'').toLowerCase(),rm=(td.dataset.rom||'').toLowerCase(),cat=td.dataset.cat||'';
+  const ms=!q||ch.includes(q)||rm.includes(q);
+  const mf=AF==='all'||cat===AF||(AF==='vowel'&&td.classList.contains('hc'));
+  td.classList.toggle('dim',!(ms&&mf));
+ });
+}
+function setF(f,btn){
+ AF=f;
+ document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+ btn.classList.add('on');
+ flt(document.getElementById('sb').value);
+}
+
+let CUR=0,CTAB='info',QC=0,QT=0,QA=false;
+
+function open_(idx){
+ if(idx<0||idx>=ALL.length)return;
+ CUR=idx; EXP.add(idx); updStats();
+ const c=ALL[idx];
+ ['mC','wC'].forEach(id=>document.getElementById(id).textContent=c.char);
+ document.getElementById('wD').textContent=c.dir||'';
+ const bd=document.getElementById('mB');
+ bd.className='bg';
+ const BM={vowel:['bv','Vowel — உயிரெழுத்து'],ayutham:['ba','Āyuta Eḻuttu — ஆயுத எழுத்து'],
+  combined:['bk','Combined — உயிர்மெய்யெழுத்து'],'pure-consonant':['bp','Pure Consonant — மெய்']};
+ const [bc,bt]=BM[c.type]||['bc','Consonant'];
+ bd.classList.add(bc); bd.textContent=bt;
+ document.getElementById('mR').textContent=c.roman||'';
+ document.getElementById('mI').textContent=c.ipa||'';
+ document.getElementById('mT').textContent=c.catT?c.cat+' — '+c.catT:'';
+ document.getElementById('mP').textContent=c.pron||'';
+ document.getElementById('mE').textContent=c.ex||'';
+ document.getElementById('mF').textContent=c.fact||'';
+ const cp=document.getElementById('mCp');
+ if(c.type==='combined'){
+  cp.style.display='flex';
+  cp.innerHTML='<span>'+c.consChar+'்'+'</span><span class="cop">+</span><span>'+c.vowChar+'</span><span class="cop">=</span><span style="color:#5dade2">'+c.char+'</span>';
+ } else cp.style.display='none';
+ // Stroke steps
+ const list=document.getElementById('wSt'); list.innerHTML='';
+ const NM={'①':'1','②':'2','③':'3','④':'4','⑤':'5'};
+ (c.stroke||'').split('\n').filter(s=>s.trim()).forEach(s=>{
+  const n=s.match(/^([①②③④⑤])/);
+  const li=document.createElement('li'); li.className='si';
+  li.innerHTML='<span class="sn">'+(NM[n&&n[1]]||'•')+'</span><span class="st">'+s.replace(/^[①②③④⑤]\s*/,'')+'</span>';
+  list.appendChild(li);
+ });
+ document.getElementById('wTp').textContent=c.tip?'💡 '+c.tip:'';
+ const lb=document.getElementById('lbtn');
+ lb.textContent=LRN.has(idx)?'✅ Learned!':'☐ Mark as Learned';
+ lb.classList.toggle('mk',LRN.has(idx));
+ document.getElementById('mpg').textContent='Character '+(idx+1)+' of '+ALL.length;
+ document.getElementById('ov').classList.add('open');
+ ['aw1','aw2'].forEach(id=>document.getElementById(id).classList.remove('go'));
+ stab(CTAB); buildLookAlikes(c);
+}
+
+function stab(name,btn){
+ CTAB=name;
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+ document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+ document.getElementById('pn-'+name).classList.add('on');
+ if(btn){btn.classList.add('on');}
+ else{document.querySelectorAll('.tab').forEach(t=>{if(t.textContent.toLowerCase().includes(name==='info'?'over':name))t.classList.add('on');});}
+}
+
+function cls(){
+ document.getElementById('ov').classList.remove('open');
+ if(window.speechSynthesis)speechSynthesis.cancel();
+ ['aw1','aw2'].forEach(id=>document.getElementById(id).classList.remove('go'));
+}
+function ovc(e){if(e.target===document.getElementById('ov'))cls();}
+function nav(d){open_(CUR+d);}
+
+document.addEventListener('keydown',function(e){
+ if(!document.getElementById('ov').classList.contains('open'))return;
+ if(e.key==='Escape')cls();
+ if(e.key==='ArrowRight')nav(1);
+ if(e.key==='ArrowLeft')nav(-1);
+});
+
+function togL(){
+ LRN.has(CUR)?LRN.delete(CUR):LRN.add(CUR);
+ const lb=document.getElementById('lbtn');
+ lb.textContent=LRN.has(CUR)?'✅ Learned!':'☐ Mark as Learned';
+ lb.classList.toggle('mk',LRN.has(CUR));
+ const cell=document.getElementById('c'+CUR);
+ if(cell)cell.classList.toggle('ok',LRN.has(CUR));
+ updStats();
+}
+function updStats(){
+ document.getElementById('expC').textContent=EXP.size;
+ document.getElementById('lrnC').textContent=LRN.size;
+}
+
+function bldQ(){} // quiz tab removed — standalone quiz handles this
+
+function chkQ(){} // quiz tab removed — standalone quiz handles scoring
+
+function nxtQ(){open_(Math.floor(Math.random()*ALL.length));stab('info');}
+
+function shfl(a){
+ const b=a.slice();
+ for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=b[i];b[i]=b[j];b[j]=t;}
+ return b;
+}
+
+let voices=[];
+if(window.speechSynthesis){
+ speechSynthesis.onvoiceschanged=function(){voices=speechSynthesis.getVoices();};
+ setTimeout(function(){voices=speechSynthesis.getVoices();},400);
+}
+
+function pa(){
+ const c=ALL[CUR];
+ ['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.add('go');});
+ // Primary: Google Translate TTS — authentic Tamil pronunciation, no voice installation needed
+ const au=new Audio('https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ta&q='+encodeURIComponent(c.char));
+ au.onended=function(){['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.remove('go');});};
+ au.onerror=function(){wsp(c.char);};
+ au.play().catch(function(){wsp(c.char);});
+}
+function wsp(text){
+ if(!window.speechSynthesis){['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.remove('go');});return;}
+ speechSynthesis.cancel();
+ var u=new SpeechSynthesisUtterance();
+ var tv=voices.find(function(v){return v.lang==='ta-IN'||v.lang==='ta'||v.lang.startsWith('ta');});
+ if(tv){u.voice=tv;u.lang=tv.lang;}else{u.lang='ta-IN';}
+ u.text=text;u.rate=0.85;
+ u.onend=u.onerror=function(){['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.remove('go');});};
+ speechSynthesis.speak(u);
+}
+
+// ══ Standalone Competitive Quiz ══════════════════════════════════════════════
+var QZ2={score:0,streak:0,best:0,lives:3,total:0,tmr:null,answered:false,cur:null,mode:'c2r'};
+
+function startQuiz(){
+ QZ2={score:0,streak:0,best:0,lives:3,total:0,tmr:null,answered:false,cur:null,mode:'c2r'};
+ document.getElementById('qov2').classList.add('open');
+ document.getElementById('qendscr').classList.remove('show');
+ document.getElementById('qgame2').style.display='';
+ updQLives();updQStats2();
+ nextQZ();
+}
+function closeQuiz(){document.getElementById('qov2').classList.remove('open');clearInterval(QZ2.tmr);}
+function qov2click(e){if(e.target===document.getElementById('qov2'))closeQuiz();}
+
+function updQLives(){
+ var el=document.getElementById('qlives2');el.innerHTML='';
+ for(var i=0;i<3;i++){var s=document.createElement('span');s.className='qhrt'+(i>=QZ2.lives?' lost':'');s.textContent='❤️';el.appendChild(s);}
+}
+function updQStats2(){
+ document.getElementById('qcort').textContent=QZ2.score;
+ document.getElementById('qstrt').textContent=QZ2.streak;
+ document.getElementById('qtott').textContent=QZ2.total;
+ document.getElementById('qscr2t').textContent='Score: '+QZ2.score+' | Best streak: '+QZ2.best+'🔥';
+}
+
+function nextQZ(){
+ if(QZ2.lives<=0){endQuiz2();return;}
+ QZ2.answered=false;
+ document.getElementById('qfb3t').textContent='';
+ var pool=ALL.filter(function(a){return a.roman&&a.char&&a.roman.length>0;});
+ var c=pool[Math.floor(Math.random()*pool.length)];
+ QZ2.cur=c;
+ var mode=Math.random()>0.5?'c2r':'r2c';
+ QZ2.mode=mode;
+ var bigEl=document.getElementById('qbig2t');
+ var askEl=document.getElementById('qask2t');
+ if(mode==='c2r'){
+  bigEl.textContent=c.char;
+  bigEl.style.fontSize=c.char.length>2?'3em':'5.5em';
+  askEl.textContent='What is the romanization of this character?';
+  document.getElementById('qmode2t').textContent='Tamil → Romanization';
+ } else {
+  bigEl.textContent=c.roman;
+  bigEl.style.fontSize='2.8em';
+  askEl.textContent='Which Tamil character makes this sound?';
+  document.getElementById('qmode2t').textContent='Romanization → Tamil';
+ }
+ var wrong=shfl(pool.filter(function(x){return x.roman!==c.roman;})).slice(0,3);
+ var opts=shfl([c].concat(wrong));
+ var og=document.getElementById('qopts2t');og.innerHTML='';
+ opts.forEach(function(opt){
+  var b=document.createElement('button');b.className='qo2';
+  var label=mode==='c2r'?opt.roman:opt.char;
+  b.textContent=label;
+  b.style.fontSize=(mode==='r2c'&&opt.char.length>2)?'1.3em':'1em';
+  var correct=mode==='c2r'?c.roman:c.char;
+  var chosen=mode==='c2r'?opt.roman:opt.char;
+  b.onclick=function(){chkQZ(b,chosen,correct,og);};
+  og.appendChild(b);
+ });
+ clearInterval(QZ2.tmr);
+ var fill=document.getElementById('qtfill');
+ fill.style.transition='none';fill.style.width='100%';
+ setTimeout(function(){fill.style.transition='width 12s linear';fill.style.width='0%';},30);
+ var secs=12;
+ QZ2.tmr=setInterval(function(){
+  secs--;
+  if(secs<=0){
+   clearInterval(QZ2.tmr);
+   if(!QZ2.answered){
+    QZ2.answered=true;QZ2.total++;QZ2.streak=0;QZ2.lives--;updQLives();
+    var fb=document.getElementById('qfb3t');
+    var ans=QZ2.mode==='c2r'?QZ2.cur.roman:QZ2.cur.char;
+    fb.textContent='⏰ Time\'s up! Answer: '+ans;
+    fb.style.color='#e74c3c';
+    document.getElementById('qopts2t').querySelectorAll('.qo2').forEach(function(b){
+     b.disabled=true;
+     if(b.textContent===ans)b.classList.add('ok2');
+    });
+    updQStats2();
+    if(QZ2.lives<=0){setTimeout(endQuiz2,1800);return;}
+    setTimeout(nextQZ,2200);
+   }
+  }
+ },1000);
+}
+
+function chkQZ(btn,chosen,correct,og){
+ if(QZ2.answered)return;
+ QZ2.answered=true;QZ2.total++;
+ clearInterval(QZ2.tmr);
+ var ok=chosen===correct;
+ if(ok){QZ2.score++;QZ2.streak++;if(QZ2.streak>QZ2.best)QZ2.best=QZ2.streak;}
+ else{QZ2.streak=0;QZ2.lives--;updQLives();}
+ btn.classList.add(ok?'ok2':'no2');
+ og.querySelectorAll('.qo2').forEach(function(b){
+  b.disabled=true;
+  if(b.textContent===correct)b.classList.add('ok2');
+ });
+ var fb=document.getElementById('qfb3t');
+ fb.textContent=ok?('✅ Correct!'+(QZ2.streak>2?' 🔥 '+QZ2.streak+' in a row!':'')):'❌ '+correct;
+ fb.style.color=ok?'#2ecc71':'#e74c3c';
+ updQStats2();
+ if(QZ2.lives<=0){setTimeout(endQuiz2,2000);return;}
+ setTimeout(nextQZ,ok?1100:2300);
+}
+
+function endQuiz2(){
+ clearInterval(QZ2.tmr);
+ document.getElementById('qgame2').style.display='none';
+ document.getElementById('qendscr').classList.add('show');
+ var pct=QZ2.total>0?Math.round(QZ2.score/QZ2.total*100):0;
+ var emoji='😅',msg='Keep practising!';
+ if(pct>=90){emoji='🏆';msg='Outstanding! You really know your Tamil!';}
+ else if(pct>=75){emoji='🌟';msg='Excellent — almost mastered it!';}
+ else if(pct>=50){emoji='👍';msg='Good effort — keep going!';}
+ document.getElementById('qendemoji').textContent=emoji;
+ document.getElementById('qendmsg').textContent=msg;
+ document.getElementById('qendsub').textContent='Score: '+QZ2.score+'/'+QZ2.total+' ('+pct+'%) | Best streak: '+QZ2.best+' 🔥';
+}
+// ═════════════════════════════════════════════════════════════════════════════
+
+// ── Confusables map ───────────────────────────────────────────────────────────
+var CF={
+ /* Vowels — short/long pairs are the primary visual confusables */
+ 'அ':[['ஆ','ஆ = அ + a vertical stroke on the right. Same base, longer sound']],
+ 'ஆ':[['அ','அ is ஆ without the right-side vertical stroke — short sound']],
+ 'இ':[['ஈ','ஈ has a second parallel stroke mirroring இ side by side']],
+ 'ஈ':[['இ','இ is the single-stroke form — both look like mirror images']],
+ 'உ':[['ஊ','ஊ extends the bottom curl of உ deeper and wider — same opening shape']],
+ 'ஊ':[['உ','உ is the simpler curl — ஊ exaggerates the same motion']],
+ 'எ':[['ஏ','ஏ has a wider sweeping open arc at the top compared to எ']],
+ 'ஏ':[['எ','எ is compact; ஏ opens up the same top arc for the long vowel']],
+ 'ஒ':[['ஓ','ஓ = ஒ + a rightward extending tail. Same loop, different length']],
+ 'ஓ':[['ஒ','ஒ is ஓ without the tail — the loop at top is identical']],
+ 'ஐ':[['ஔ','Both are diphthongs with two-part shapes and similar curve openings']],
+ 'ஔ':[['ஐ','Both multi-element vowels — ஔ uses ஒ as its base, ஐ uses twin curves']],
+ /* Consonants — genuinely visually confusable pairs */
+ 'க':[['ங','ங has the same upper curve as க but adds a loop inside']],
+ 'ங':[['க','க is the same curve without the inner loop — ங only ever follows க']],
+ 'ட':[['ண','Both open with a curved top — ட is straighter, ண adds a full circular loop']],
+ 'ண':[['ட','ட has a simpler curved top; ண adds a pronounced lasso loop below'],
+       ['ள','Both have loops — ண tail goes straight down, ள extends right then down']],
+ 'ந':[['ன','Arch shapes are nearly identical — context tells them apart: ந starts words, ன ends syllables']],
+ 'ன':[['ந','Near-identical arches — ன is never at the start of a word, ந is never at the end']],
+ 'ப':[['ர','Both have a vertical stroke with an attached loop — the ர loop curls outward at the base']],
+ 'ர':[['ப','ப loop is side-attached mid-stroke; ர loop curls at the very bottom'],
+      ['ற','ர is a light flowing curve; ற has the same feel but with a stronger outward tail']],
+ 'ற':[['ர','Both are r-sounds with flowing curves — ற has a more dramatic sweeping bottom tail']],
+ 'ல':[['ள','Almost identical top section — ள has an inward curl where ல curves out'],
+      ['ழ','ழ has a distinctive backward spiral that ல does not — look at the top stroke']],
+ 'ள':[['ல','Both start the same way — the bottom stroke curves differently: ள inward, ல outward'],
+      ['ண','Both have circular elements — ண descends, ள extends right'],
+      ['ழ','ழ spirals; ள loops. All three are distinct sounds beginners frequently mix up']],
+ 'ழ':[['ள','ழ opens with a backward spiral; ள has a forward loop — the top stroke is key'],
+      ['ல','ல is angular; ழ spirals. Three different sounds that look similar at first glance']],
+ 'வ':[['ம','Both curve from top-left — வ fans into a W/M shape, ம closes into a loop']],
+ 'ம':[['வ','Both start with a leftward curve — ம closes the loop, வ opens outward like a W']],
+};
+
+// ── Populate Look-Alikes tab ──────────────────────────────────────────────────
+function buildLookAlikes(c){
+ var el=document.getElementById('laContent');
+ var baseChar=c.type==='combined'?c.consChar:c.type==='pure-consonant'?c.char.replace('்',''):c.char;
+ var list=CF[baseChar]||CF[c.char];
+ if(!list||list.length===0){el.innerHTML='<div class="nocnf">No common confusables for this character.</div>';return;}
+ var html='<div class="larow">';
+ list.forEach(function(pair){
+  var ch=pair[0],note=pair[1];
+  // find index in ALL
+  var idx=ALL.findIndex(function(a){return a.char===ch;});
+  var rom=idx>=0?ALL[idx].roman:'';
+  html+='<div class="lacard" onclick="cls();open_('+idx+')">'
+   +'<div class="lachr">'+ch+'</div>'
+   +'<div class="larom">'+rom+'</div>'
+   +'</div>';
+ });
+ html+='</div>';
+ // notes below
+ list.forEach(function(pair){
+  html+='<div class="lanote"><strong style="color:#f4d03f">'+pair[0]+'</strong> vs <strong style="color:#f4d03f">'+baseChar+'</strong> — '+pair[1]+'</div>';
+ });
+ el.innerHTML=html;
+}
+
+// ── Memory Match ──────────────────────────────────────────────────────────────
+var MM={diff:'vowels',cards:[],flipped:[],matched:0,moves:0,tmr:null,secs:0,locked:false};
+
+function openMM(){
+ document.getElementById('mmo').classList.add('open');
+ document.getElementById('mmwin').classList.remove('show');
+ document.getElementById('mmgrid').style.display='grid';
+ startMM();
+}
+function closeMM(){document.getElementById('mmo').classList.remove('open');clearInterval(MM.tmr);}
+function mmovclick(e){if(e.target===document.getElementById('mmo'))closeMM();}
+function setMD(d,btn){
+ MM.diff=d;
+ document.querySelectorAll('.mmdbt').forEach(function(b){b.classList.remove('on');});
+ btn.classList.add('on');
+ startMM();
+}
+
+function getPairs(){
+ var pool;
+ if(MM.diff==='vowels') pool=VOWELS.slice(0,12);
+ else if(MM.diff==='hard') pool=CONS.filter(function(c){return c.cat==='Hard';});
+ else if(MM.diff==='soft') pool=CONS.filter(function(c){return c.cat==='Soft';});
+ else if(MM.diff==='middle') pool=CONS.filter(function(c){return c.cat==='Middle';});
+ else{
+  var combined=VOWELS.slice(0,6).concat(CONS.filter(function(c){return c.cat==='Hard';}).slice(0,6));
+  pool=combined;
+ }
+ return shfl(pool).slice(0,8);
+}
+
+function startMM(){
+ clearInterval(MM.tmr);
+ MM={diff:MM.diff,cards:[],flipped:[],matched:0,moves:0,tmr:null,secs:0,locked:false};
+ document.getElementById('mmwin').classList.remove('show');
+ document.getElementById('mmgrid').style.display='grid';
+ document.getElementById('mmmv').textContent='0';
+ document.getElementById('mmpr').textContent='0';
+ document.getElementById('mmtm').textContent='0:00';
+ var pairs=getPairs();
+ var deck=[];
+ pairs.forEach(function(p,i){
+  deck.push({id:'t'+i,char:p.char,label:p.char,kind:'tc',pairId:i});
+  deck.push({id:'r'+i,char:p.char,label:p.roman,kind:'rc',pairId:i});
+ });
+ deck=shfl(deck);
+ var grid=document.getElementById('mmgrid');grid.innerHTML='';
+ deck.forEach(function(d,idx){
+  var div=document.createElement('div');div.className='mmc';div.id='mc'+idx;
+  div.innerHTML='<div class="mmc-in"><div class="mmc-f"></div><div class="mmc-b '+d.kind+'">'+d.label+'</div></div>';
+  div.dataset.pairid=d.pairId;div.dataset.kind=d.kind;
+  div.onclick=function(){flipCard(div);};
+  grid.appendChild(div);
+  MM.cards.push(div);
+ });
+ // Start timer
+ MM.tmr=setInterval(function(){
+  MM.secs++;
+  var m=Math.floor(MM.secs/60),sc=MM.secs%60;
+  document.getElementById('mmtm').textContent=m+':'+(sc<10?'0':'')+sc;
+ },1000);
+}
+
+function flipCard(card){
+ if(MM.locked||card.classList.contains('flipped')||card.classList.contains('matched'))return;
+ card.classList.add('flipped');
+ MM.flipped.push(card);
+ if(MM.flipped.length===2){
+  MM.locked=true;MM.moves++;
+  document.getElementById('mmmv').textContent=MM.moves;
+  var a=MM.flipped[0],b=MM.flipped[1];
+  var match=a.dataset.pairid===b.dataset.pairid&&a.dataset.kind!==b.dataset.kind;
+  if(match){
+   a.classList.add('matched');b.classList.add('matched');
+   MM.matched++;MM.flipped=[];MM.locked=false;
+   document.getElementById('mmpr').textContent=MM.matched;
+   if(MM.matched===8){setTimeout(finishMM,600);}
+  } else {
+   setTimeout(function(){
+    a.classList.add('wrong');b.classList.add('wrong');
+    setTimeout(function(){
+     a.classList.remove('flipped','wrong');b.classList.remove('flipped','wrong');
+     MM.flipped=[];MM.locked=false;
+    },500);
+   },700);
+  }
+ }
+}
+
+function finishMM(){
+ clearInterval(MM.tmr);
+ document.getElementById('mmgrid').style.display='none';
+ document.getElementById('mmwin').classList.add('show');
+ var m=Math.floor(MM.secs/60),sc=MM.secs%60;
+ var timeStr=m+':'+(sc<10?'0':'')+sc;
+ var emoji=MM.moves<=10?'🏆':MM.moves<=16?'🌟':'👍';
+ document.getElementById('mmwemoji').textContent=emoji;
+ document.getElementById('mmwmsg').textContent=MM.moves<=10?'Amazing memory!':MM.moves<=16?'Well done!':'Good effort!';
+ document.getElementById('mmwsub').textContent='Completed in '+timeStr+' with '+MM.moves+' moves';
+}
+
+// ── Feedback Widget ───────────────────────────────────────────────────────────
+var FBK_RATING=0;
+function openFbk(){document.getElementById('fbkOv').classList.add('open');}
+function closeFbk(){document.getElementById('fbkOv').classList.remove('open');}
+function fbkOvClick(e){if(e.target===document.getElementById('fbkOv'))closeFbk();}
+function setStars(n){
+ FBK_RATING=n;
+ document.querySelectorAll('.fbk-star').forEach(function(s){
+  s.classList.toggle('on',parseInt(s.dataset.v)<=n);
+ });
+}
+function submitFbk(e){
+ e.preventDefault();
+ var role=document.getElementById('fbkRole').value;
+ if(!role||FBK_RATING===0){document.getElementById('fbkErr').style.display='block';return;}
+ document.getElementById('fbkErr').style.display='none';
+ var data={
+  name:document.getElementById('fbkName').value||'Anonymous',
+  role:role,
+  age:document.getElementById('fbkAge').value||'Not specified',
+  source:document.getElementById('fbkSource').value||'Not specified',
+  rating:FBK_RATING+'/5',
+  comments:document.getElementById('fbkText').value||'—',
+  wouldShare:document.getElementById('fbkShare').checked?'Yes':'No'
+ };
+ // ── Replace the URL below with your Formspree endpoint ──────────────────────
+ // 1. Go to https://formspree.io and sign up free
+ // 2. Create a new form → copy the endpoint URL
+ // 3. Paste it here replacing 'https://formspree.io/f/YOUR_FORM_ID'
+ var ENDPOINT='https://formspree.io/f/YOUR_FORM_ID';
+ // ────────────────────────────────────────────────────────────────────────────
+ if(ENDPOINT.includes('YOUR_FORM_ID')){
+  // Dev mode: just show success without submitting
+  document.getElementById('fbkForm').style.display='none';
+  document.getElementById('fbkOk').classList.add('show');
+  return;
+ }
+ fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+ .then(function(r){
+  if(r.ok){document.getElementById('fbkForm').style.display='none';document.getElementById('fbkOk').classList.add('show');}
+  else{document.getElementById('fbkErr').textContent='Submission failed — please try again.';document.getElementById('fbkErr').style.display='block';}
+ })
+ .catch(function(){document.getElementById('fbkErr').textContent='Network error — please try again.';document.getElementById('fbkErr').style.display='block';});
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+buildTable();
+</script>
+
+<!-- Feedback button -->
+<button class="fbk-btn" onclick="openFbk()">💬 Feedback</button>
+
+<!-- Feedback modal -->
+<div class="fbk-ov" id="fbkOv" onclick="fbkOvClick(event)">
+ <div class="fbk-md">
+  <div class="fbk-top">
+   <div>
+    <div class="fbk-h">💬 Share Your Feedback</div>
+    <div class="fbk-sub">Helps us make this better for learners</div>
+   </div>
+   <button class="fbk-cls" onclick="closeFbk()">✕</button>
+  </div>
+
+  <!-- Success state -->
+  <div class="fbk-ok" id="fbkOk">
+   <div class="fbk-ok-emoji">🙏</div>
+   <div class="fbk-ok-msg">Thank you for your feedback!</div>
+   <div class="fbk-ok-sub">It helps us improve the experience for every learner.</div>
+  </div>
+
+  <!-- Form -->
+  <form id="fbkForm" onsubmit="submitFbk(event)">
+   <label class="fbk-lbl">Your name <span style="color:#555">(optional)</span></label>
+   <input class="fbk-inp" id="fbkName" type="text" placeholder="e.g. Priya" autocomplete="off">
+
+   <label class="fbk-lbl">I am a…</label>
+   <select class="fbk-sel" id="fbkRole">
+    <option value="">— select —</option>
+    <option>Parent</option>
+    <option>Teacher</option>
+    <option>Student</option>
+    <option>Other</option>
+   </select>
+
+   <label class="fbk-lbl">Learner's age range</label>
+   <select class="fbk-sel" id="fbkAge">
+    <option value="">— select —</option>
+    <option>Under 5</option>
+    <option>5 – 8</option>
+    <option>9 – 12</option>
+    <option>13 – 17</option>
+    <option>Adult</option>
+   </select>
+
+   <label class="fbk-lbl">How did you find this?</label>
+   <select class="fbk-sel" id="fbkSource">
+    <option value="">— select —</option>
+    <option>Family or Friend</option>
+    <option>Social Media</option>
+    <option>Google Search</option>
+    <option>Tamil School</option>
+    <option>Other</option>
+   </select>
+
+   <label class="fbk-lbl">How would you rate it?</label>
+   <div class="fbk-stars" id="fbkStars">
+    <span class="fbk-star" data-v="1" onclick="setStars(1)">★</span>
+    <span class="fbk-star" data-v="2" onclick="setStars(2)">★</span>
+    <span class="fbk-star" data-v="3" onclick="setStars(3)">★</span>
+    <span class="fbk-star" data-v="4" onclick="setStars(4)">★</span>
+    <span class="fbk-star" data-v="5" onclick="setStars(5)">★</span>
+   </div>
+
+   <label class="fbk-lbl">Suggestions or comments</label>
+   <textarea class="fbk-ta" id="fbkText" placeholder="What worked well? What could be better?"></textarea>
+
+   <label class="fbk-chk"><input type="checkbox" id="fbkShare"> I would recommend this to others</label>
+
+   <div class="fbk-err" id="fbkErr">Please fill in the required fields (role + rating).</div>
+   <button class="fbk-sbtn" type="submit">Send Feedback →</button>
+  </form>
+ </div>
+</div>
+
+</body>
+</html>
