@@ -1002,28 +1002,48 @@ function shfl(a){
 
 let voices=[];
 if(window.speechSynthesis){
- speechSynthesis.onvoiceschanged=function(){voices=speechSynthesis.getVoices();};
- setTimeout(function(){voices=speechSynthesis.getVoices();},400);
+ var loadVoices=function(){voices=speechSynthesis.getVoices();};
+ speechSynthesis.onvoiceschanged=loadVoices;
+ loadVoices();
+ setTimeout(loadVoices,300);setTimeout(loadVoices,1000);
 }
 
 function pa(){
- const c=ALL[CUR];
- ['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.add('go');});
- // Primary: Google Translate TTS — authentic Tamil pronunciation, no voice installation needed
- const au=new Audio('https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ta&q='+encodeURIComponent(c.char));
- au.onended=function(){['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.remove('go');});};
- au.onerror=function(){wsp(c.char);};
- au.play().catch(function(){wsp(c.char);});
+ var c=ALL[CUR];
+ if(!c||!window.speechSynthesis)return;
+ var stop=function(){['aw1','aw2'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('go');});};
+ ['aw1','aw2'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('go');});
+ // Chrome bug: speechSynthesis can enter paused state silently — resume first
+ speechSynthesis.cancel();
+ speechSynthesis.resume();
+ setTimeout(function(){
+  var vlist=speechSynthesis.getVoices();
+  var tamilVoice=null;
+  for(var vi=0;vi<vlist.length;vi++){
+   if(vlist[vi].lang&&vlist[vi].lang.startsWith('ta')){tamilVoice=vlist[vi];break;}
+  }
+  var text,lang,voice;
+  if(tamilVoice){
+   text=c.char;lang=tamilVoice.lang;voice=tamilVoice;
+  } else {
+   var rom=(c.roman||'a').split('/')[0];
+   rom=rom.replace(/ā/g,'aa').replace(/ī/g,'ee').replace(/ū/g,'oo')
+          .replace(/ē/g,'ay').replace(/ō/g,'oh').replace(/ḻ/g,'zh')
+          .replace(/ḷ/g,'l').replace(/ṇ/g,'n').replace(/ṭ/g,'t')
+          .replace(/ṅ/g,'ng').replace(/ñ/g,'ny');
+   text=rom;lang='en-US';voice=null;
+  }
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang=lang;if(voice)u.voice=voice;
+  u.rate=0.8;u.pitch=1;
+  u.onend=stop;u.onerror=stop;
+  setTimeout(stop,5000);
+  speechSynthesis.resume();
+  speechSynthesis.speak(u);
+ },100);
 }
 function wsp(text){
- if(!window.speechSynthesis){['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.remove('go');});return;}
- speechSynthesis.cancel();
- var u=new SpeechSynthesisUtterance();
- var tv=voices.find(function(v){return v.lang==='ta-IN'||v.lang==='ta'||v.lang.startsWith('ta');});
- if(tv){u.voice=tv;u.lang=tv.lang;}else{u.lang='ta-IN';}
- u.text=text;u.rate=0.85;
- u.onend=u.onerror=function(){['aw1','aw2'].forEach(function(id){document.getElementById(id).classList.remove('go');});};
- speechSynthesis.speak(u);
+ // Handled by pa() — kept for compatibility
 }
 
 // ══ Standalone Competitive Quiz ══════════════════════════════════════════════
