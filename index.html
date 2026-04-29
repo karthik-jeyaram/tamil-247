@@ -1070,40 +1070,72 @@ function nextQZ(){
  if(QZ2.lives<=0){endQuiz2();return;}
  QZ2.answered=false;
  document.getElementById('qfb3t').textContent='';
- // Formula quiz: Ik + A = ? → pick combined character
- var cons=CONS[Math.floor(Math.random()*CONS.length)];
- var matraIdx=Math.floor(Math.random()*MATRAS.length);
- var matra=MATRAS[matraIdx];
- var correctCombined=cons.char+matra.m;
- var conRom=cons.roman.split('/')[0];
- var vowelRom=matra.r||'a';
- QZ2.cur={cons:cons,matra:matra,combined:correctCombined};
- QZ2.mode='formula';
- // Show formula: க் + அ = ?
  var bigEl=document.getElementById('qbig2t');
- bigEl.innerHTML=
-  '<span class="qfml">'
-  +'<span class="qfpart"><span class="qfchar">'+cons.pure+'</span><span class="qfrom">'+conRom+'</span></span>'
-  +'<span class="qfop">+</span>'
-  +'<span class="qfpart"><span class="qfchar">'+matra.v+'</span><span class="qfrom">'+vowelRom+'</span></span>'
-  +'<span class="qfop">=</span>'
-  +'<span class="qfeq">?</span>'
-  +'</span>';
- bigEl.style.fontSize='1em';
- document.getElementById('qask2t').textContent='Pick the combined character';
- document.getElementById('qmode2t').textContent='Q.'+(QZ2.total+1)+' — Formula → Character';
- // 3 wrong options: same consonant, different matras
- var otherMatras=shfl(MATRAS.filter(function(m,i){return i!==matraIdx;})).slice(0,3);
- var opts=shfl([correctCombined].concat(otherMatras.map(function(m){return cons.char+m.m;})));
  var og=document.getElementById('qopts2t');og.innerHTML='';
- opts.forEach(function(opt){
-  var b=document.createElement('button');b.className='qo2';
-  b.textContent=opt;
-  b.style.fontSize='2em';
-  b.style.padding='10px 8px';
-  b.onclick=function(){chkQZ(b,opt,correctCombined,og);};
-  og.appendChild(b);
- });
+ // Alternate: even questions = formula, odd = category
+ var useCategory=(QZ2.total%2===1)&&CONS.some(function(c){return c.cat!=='Mix';});
+ if(useCategory){
+  // ── Category question: show a consonant, pick Hard / Soft / Middle ──
+  var cons=CONS[Math.floor(Math.random()*CONS.length)];
+  var correctCat=cons.cat+' / '+cons.catT;
+  QZ2.cur={cons:cons,correct:correctCat};
+  QZ2.mode='category';
+  document.getElementById('qmode2t').textContent='Q.'+(QZ2.total+1)+' — Consonant → Category';
+  document.getElementById('qask2t').textContent='Which category does this consonant belong to?';
+  bigEl.innerHTML=
+   '<span class="qfml">'
+   +'<span class="qfpart">'
+   +'<span class="qfchar" style="font-size:3em">'+cons.pure+'</span>'
+   +'<span class="qfrom">'+cons.roman.split('/')[0]+'</span>'
+   +'</span>'
+   +'</span>';
+  bigEl.style.fontSize='1em';
+  var cats=[
+   {val:'Hard / வல்லினம்',   hint:'க ச ட த ப ற',   col:'#B00020'},
+   {val:'Soft / மெல்லினம்',  hint:'ங ஞ ண ந ம ன',  col:'#1B7F3B'},
+   {val:'Middle / இடையினம்', hint:'ய ர ல வ ழ ள', col:'#1A4FBF'}
+  ];
+  cats.forEach(function(cat){
+   var b=document.createElement('button');b.className='qo2';
+   b.innerHTML='<span style="font-size:1em;font-weight:700;color:'+cat.col+'">'+cat.val+'</span>'
+    +'<span style="font-size:0.45em;display:block;color:#aaa;margin-top:2px">'+cat.hint+'</span>';
+   b.style.fontSize='1em';b.style.padding='10px 14px';b.style.lineHeight='1.3';
+   b.onclick=function(){chkQZ(b,cat.val,correctCat,og);};
+   og.appendChild(b);
+  });
+ } else {
+  // ── Formula question: க் + அ = ? ──
+  var cons=CONS[Math.floor(Math.random()*CONS.length)];
+  var matraIdx=Math.floor(Math.random()*MATRAS.length);
+  var matra=MATRAS[matraIdx];
+  var correctCombined=cons.char+matra.m;
+  var conRom=cons.roman.split('/')[0];
+  var vowelRom=matra.r||'a';
+  QZ2.cur={cons:cons,matra:matra,combined:correctCombined};
+  QZ2.mode='formula';
+  document.getElementById('qmode2t').textContent='Q.'+(QZ2.total+1)+' — Formula → Character';
+  document.getElementById('qask2t').textContent='Pick the combined character';
+  bigEl.innerHTML=
+   '<span class="qfml">'
+   +'<span class="qfpart"><span class="qfchar">'+cons.pure+'</span><span class="qfrom">'+conRom+'</span></span>'
+   +'<span class="qfop">+</span>'
+   +'<span class="qfpart"><span class="qfchar">'+matra.v+'</span><span class="qfrom">'+vowelRom+'</span></span>'
+   +'<span class="qfop">=</span>'
+   +'<span class="qfeq">?</span>'
+   +'</span>';
+  bigEl.style.fontSize='1em';
+  var otherMatras=shfl(MATRAS.filter(function(m,i){return i!==matraIdx;})).slice(0,3);
+  var opts=shfl([correctCombined].concat(otherMatras.map(function(m){return cons.char+m.m;})));
+  opts.forEach(function(opt){
+   var b=document.createElement('button');b.className='qo2';
+   b.textContent=opt;b.style.fontSize='2em';b.style.padding='10px 8px';
+   b.onclick=function(){chkQZ(b,opt,correctCombined,og);};
+   og.appendChild(b);
+  });
+  var correctCat=correctCombined; // alias for timer block
+ }
+ // ── Shared timer ──
+ var correctAnswer=(QZ2.mode==='category')?QZ2.cur.correct:QZ2.cur.combined;
  clearInterval(QZ2.tmr);
  var fill=document.getElementById('qtfill');
  fill.style.transition='none';fill.style.width='100%';
@@ -1116,11 +1148,11 @@ function nextQZ(){
    if(!QZ2.answered){
     QZ2.answered=true;QZ2.total++;QZ2.streak=0;QZ2.lives--;updQLives();
     var fb=document.getElementById('qfb3t');
-    fb.textContent='⏰ Time\'s up! Answer: '+correctCombined;
+    fb.textContent='⏰ Time\'s up! Answer: '+correctAnswer;
     fb.style.color='#e74c3c';
     document.getElementById('qopts2t').querySelectorAll('.qo2').forEach(function(b){
      b.disabled=true;
-     if(b.textContent===correctCombined)b.classList.add('ok2');
+     if(b.textContent.indexOf(correctAnswer)!==-1||b.innerHTML.indexOf(correctAnswer)!==-1)b.classList.add('ok2');
     });
     updQStats2();
     if(QZ2.lives<=0){setTimeout(endQuiz2,1800);return;}
@@ -1358,8 +1390,12 @@ function setStars(n){
 }
 function submitFbk(e){
  e.preventDefault();
+ var name=document.getElementById('fbkName').value.trim();
  var role=document.getElementById('fbkRole').value;
- if(!role||FBK_RATING===0){document.getElementById('fbkErr').style.display='block';return;}
+ if(!name||!role||FBK_RATING===0){
+  document.getElementById('fbkErr').textContent='Please fill in your name, role and rating.';
+  document.getElementById('fbkErr').style.display='block';return;
+ }
  document.getElementById('fbkErr').style.display='none';
  // Update hidden rating field for Netlify
  document.getElementById('fbkRatingHidden').value=FBK_RATING+'/5';
@@ -1370,7 +1406,7 @@ function submitFbk(e){
  };
  var payload={
   'form-name':'feedback',
-  'name':document.getElementById('fbkName').value||'Anonymous',
+  'name':name,
   'role':role,
   'age':document.getElementById('fbkAge').value||'Not specified',
   'source':document.getElementById('fbkSource').value||'Not specified',
@@ -1531,8 +1567,8 @@ buildTable();
   <!-- Form -->
   <form id="fbkForm" name="feedback" method="POST" data-netlify="true" netlify onsubmit="submitFbk(event)">
    <input type="hidden" name="form-name" value="feedback">
-   <label class="fbk-lbl">Your name <span style="color:#555">(optional)</span></label>
-   <input class="fbk-inp" id="fbkName" name="name" type="text" placeholder="e.g. Priya" autocomplete="off">
+   <label class="fbk-lbl">Your name <span style="color:#e74c3c">*</span></label>
+   <input class="fbk-inp" id="fbkName" name="name" type="text" placeholder="e.g. Priya" autocomplete="off" required>
 
    <label class="fbk-lbl">I am a…</label>
    <select class="fbk-sel" id="fbkRole" name="role">
