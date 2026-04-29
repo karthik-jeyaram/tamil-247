@@ -1378,7 +1378,7 @@ function submitFbk(e){
  };
  var sbtn=document.querySelector('.fbk-sbtn');
  sbtn.textContent='Sending…';sbtn.disabled=true;
- fetch('/',{
+ fetch(window.location.pathname,{
   method:'POST',
   headers:{'Content-Type':'application/x-www-form-urlencoded'},
   body:encode(payload)
@@ -1527,7 +1527,7 @@ buildTable();
   </div>
 
   <!-- Form -->
-  <form id="fbkForm" name="feedback" method="POST" data-netlify="true" onsubmit="submitFbk(event)">
+  <form id="fbkForm" name="feedback" method="POST" data-netlify="true" netlify onsubmit="submitFbk(event)">
    <input type="hidden" name="form-name" value="feedback">
    <label class="fbk-lbl">Your name <span style="color:#555">(optional)</span></label>
    <input class="fbk-inp" id="fbkName" name="name" type="text" placeholder="e.g. Priya" autocomplete="off">
